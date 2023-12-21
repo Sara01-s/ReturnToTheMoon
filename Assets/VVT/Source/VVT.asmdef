@@ -1,0 +1,18 @@
+{
+    "name": "VVT",
+    "rootNamespace": "",
+    "references": [
+        "Unity.InputSystem",
+        "Unity.Mathematics",
+        "NaughtyAttributes.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
