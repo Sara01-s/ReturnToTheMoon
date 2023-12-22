@@ -1,6 +1,6 @@
 # GDD Return to the Moon
 
-Última Revisión: v0.0.3, *(22/12/2023)*
+Última Revisión: v0.0.4, *(22/12/2023)*
 
 ## Resumen
 
@@ -33,10 +33,10 @@ En este Runner, deberás gestionar tus recursos y sobrevivir a una hostil monta�
 **Gameplay Núcleo (Detalle)**
 - Presiona `[Input]` para avanzar más rápido (sin posibilidad de mantener).
 	- Variaciones de esta mecánica:
-      - Mantener presionado `[Input]` mientras estés frente a un arbusto, relentizará a tu personaje y lo esconderá del peligro (sigilo).
+      - Mantener presionado `[Input]` mientras estés frente a un arbusto, ralentizará a tu personaje y lo esconderá del peligro (sigilo).
       - Quick time events con `[Input]`,
       - Decidir no presionar `[Input]` gracias a recompensas auxiliares
-      - (Idea, no definitiva) En niveles ESPECÍFICOS Presionar `[Input]` al ritmo de la música hará que avances más rápido, el no hacerlo te relentizará, esta regla actuará desde principio a fin del nivel sin ninguna otra variación presente.
+      - (Idea, no definitiva) En niveles ESPECÍFICOS Presionar `[Input]` al ritmo de la música hará que avances más rápido, el no hacerlo te ralentizará, esta regla actuará desde principio a fin del nivel sin ninguna otra variación presente.
 
 ### ***Mecánicas --> Dinámicas --> Estética (MDA)***
 
@@ -134,13 +134,13 @@ Durante el juego, el jugador deberá gestionar **4 recursos**:
     - Este múltiplicador puede tomar los valores: `[-0.5h/s], [-0.7h/s], [-1.0h/s (default)], [-1.5h/s], [-1.7h/s]`.
   - Rapidez.
     - Hay 5 valores flotantes de `[Rapidez]` posibles. `[Muy lento], [Lento], [Neutral], [Rápido], [Muy Rápido]`. Todos deben ser mayores que `1` y distintos entre sí según su semántica.
-    - Tu `[Rapidez]` por defecto es `[Neutral]` y tu dirección **CONSTANTE E INMUTABLE** es hacia la **DERECHA** *(x: 1, y: 0)*, sin embargo tu rapidez **NUNCA** será suficiente para completar un nivel antes de que el `[LDR]` te mate. Debes presionar `[Input]` para ganar `[Rapidez]` de diferentes formas. *(ver: `Elementos Interactivos`).*
+    - Tu `[Rapidez]` por defecto es `[Neutral]` y tu dirección **CONSTANTE E INMUTABLE** es hacia la **DERECHA** *(x: 1, y: 0)*, sin embargo tu `[Rapidez] DEFAULT` **NUNCA** será suficiente para completar un nivel antes de que el `[LDR]` te mate. Debes presionar `[Input]` para ganar `[Rapidez]` de diferentes formas. *(ver: `Elementos Interactivos`).*
   - Stamina.
     - El jugador tiene **4 estados** de cansancio: `[Normal], [Cansado], [Exhausto], [Fatigado].`
     - La `[Stamina]` es un valor flotante que varía entre `[0, 100]`, Este valor es controlado por los `Elementos Interactivos`.
     - Al superar límites establecidos, este valor cambiará el estado del jugador.
     <details>
-	<summary>Ejemplo</summary>
+	<summary>Ejemplo (Click para expandir)</summary>
 	Si [Stamina] está entre ([NORMAL_THRESHOLD] y 100):
 
 		Estado = [Normal]
@@ -162,11 +162,11 @@ Durante el juego, el jugador deberá gestionar **4 recursos**:
 		Error, no soportado.
 	</details>
 
-    - En una situación real, la `[Stamina]` solo te importará cuando este cerca del rango de `[Fatiga]`, pues al ser menor o igual que `0`, tu `[Rapidez]` se establecerá en `[Muy lento]` y entrarás en estado de `[Fatiga]` durante`[BURNOUT_DURATION]` segundos. En este estado, no podrás utilizar `[Input]`, lo cual puede ser mortal.
+    - En una situación real, la `[Stamina]` solo te importará cuando este cerca del rango de `[Fatiga]`, pues al ser menor o igual que `0`, tu `[Rapidez]` se establecerá en `[Muy lento]` y entrarás en estado de `[Fatiga]` durante`[BURNOUT_DURATION]` segundos. En este estado, no podrás utilizar `[Input]`, lo cual puede ser mortal. La `[Stamina]` volverá a crecer hasta `[MAX_STAMINA]` en `[STAMINA_REFILL_DURATION]` segundos.
 
 ### Elementos Interactivos
 - Boost Quick Time Event
-  - Un elemento que relentizará el tiempo por `[BOOST_SLOWDOWN_DURATION]` segundos, tendrás `[BOOST_TIMEWINDOW_DURATION]` segundos para reaccionar y presionar `[Input]`.
+  - Un elemento que ralentizará el tiempo por `[BOOST_SLOWDOWN_DURATION]` segundos, tendrás `[BOOST_TIMEWINDOW_DURATION]` segundos para reaccionar y presionar `[Input]`.
 
 **(WIP)...**
 
