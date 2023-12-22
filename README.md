@@ -1,6 +1,6 @@
 # GDD Return to the Moon
 
-Revisión: 0.0.1
+Revisión: 0.0.2
 
 ## Resumen
 
@@ -20,7 +20,7 @@ Deberás ser parte del entorno.
 
 ### Construcción del protagonista
 
-¿Cómo generamos empatía?
+¿Cómo generamos empatía por nuestro protagonista?
 - **Mala suerte.** Nuestro protagronista tiene la mala suerte de ser vulnerable a ataques por otros animales hostiles de la zona en la que se encuentra.
 - **Malos tratos.** Nuestro protagonista es rechazado por su propia especie al perder su sello identificador.
 - **Vulnerable.** Nuestro protagonista pierde sus dotes únicos, lo que lo deja indefenso en un ambiente hostil.
@@ -29,7 +29,7 @@ Deberás ser parte del entorno.
 - **Posee una verdad, pero no es oído.** Nuestro protagonista sabe lo que es y cree en sus capacidades, sin embargo lo dan por muerto y rechazan ayudarlo.
   
 
-¿Cómo generamos interés por nuestro personaje?
+¿Cómo generamos interés por nuestro protagonista?
 - **Objetivo claro.** Volver a la luna.
 - **Urgencia dramática.** Si no vuelve a tiempo, morirá.
 - **No puede conseguir su objetivo fácilmente.** Debido a su discapicidad física
@@ -39,7 +39,8 @@ Deberás ser parte del entorno.
 ***Mechanics --> Dynamics --> Aesthetics***
 
 **(M) Reglas establecidas**: 
-- Caminas siempre hacia delante, pero esto NO es suficiente, deberás presionar espacio para moverte un poco más rápido y poder conseguir tu objetivo.
+- Caminas siempre hacia delante, pero esto NO es suficiente, deberás presionar (Input) para moverte un poco más rápido durante breves segundos, así podrás conseguir tu objetivo.
+- Puedes presionar (Input) en diferentes situaciones, dependiendo de cada contexto recibiras recompensas o penalizaciones relacionadas a tu tiempo de vida.
 
 **(D) Comportamiento esperado**: 
 - Al tener un recurso vital pero seguro tras una muralla de esfuerzo seguro, deberás ser paciente y consistente.
@@ -69,6 +70,7 @@ Dash", "Alto's odyssey/adventure"
 
 Project Description (Brief)
 Project Description (Detailed)
+... (wip)
 
 ### Mecánicas de Gameplay Núcleo (Detalle)
 - Presiona (Input) para avanzar más rápido (sin posibilidad de mantener).
@@ -96,6 +98,7 @@ Durante diciembre del año 20XX, Ave Lunar(?) orbita la Tierra, entra en el camp
 
 Gameplay (Brief)
 Gameplay (Detailed)
+... (wip)
 
 ### Alcance del proyecto (Detalle)
 
@@ -106,19 +109,19 @@ Julián Abaroa (Programación, Diseño de videojuegos).
 Sara San Martín (Gráficos, Diseño de videojuegos, Audio, Programación)
   
 ### Referentes (Detalle)
-** Kiwis can't fly ** *(Cocoa Moss, DDRKirby(ISQ), Kat Jia)*
+**Kiwis can't fly** *(Cocoa Moss, DDRKirby(ISQ), Kat Jia)*
 
 Nos basamos en su trabajo del *"Mood"*, queremos crear una experiencia enfocada en la parte *Estética*. Dejando de lado mecánicas complicadas.
 
-** Planet of Lana ** *(Wishfully Studios)*
+**Planet of Lana** *(Wishfully Studios)*
 
 Queremos capturar la forma en que Planet of Lana te hace parte de su entorno. El ambiente no está diseñado PARA TI, al contrario, tu debes adaptarte a como funcional las reglas del mundo.
 
-** Geometry Dash ** *(Robtop Games)* 
+**Geometry Dash** *(Robtop Games)* 
 
 En este frenético juego se encuentran piezas de arte visual muy interesantes, ya que actúan como excelentes recompensas auxiliares. Tu objetivo no es necesariamente completar los niveles, si no simplemente admirar la creación de otra persona, con eso es suficiente para sentarse a jugar.
 
-** Alto's odyssey/adventure ** *(Noodlecake Studios)*
+**Alto's odyssey/adventure** *(Noodlecake Studios)*
 
 La jugabilidad de *"Return to the moon"* es muy similar a la de este videojuego, sin embargo, la principal inspiración viene de sus fondos, queremos capturar la sensación de escala y extensión de su mundo, lugares en los que pierdas la mirada en el horizonte.
 
