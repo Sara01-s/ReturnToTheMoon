@@ -17,7 +17,7 @@ Nuestro objetivo es lograr un producto portable, púlido y estético. (además d
 
 **Género**: 2D, Runner, Sidescroller, Musical.
 
-**Entorno**: El juego trasncurre en un **Cerro**.
+**Entorno**: El juego transcurre en un **Cerro**.
 
 **Gameplay Núcleo (Concreto y Breve)**:
 - Presionar `[Input]` genera comportamientos e interacciones según el contexto.
