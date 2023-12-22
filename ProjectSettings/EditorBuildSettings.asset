@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/VVT/Resources/SceneTemplates/VVT Intro.unity
     guid: a82349465b2f3ce4c9bc5271a2c4b5dd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Game_Tiles.unity
     guid: 094acd3e36b57484a9976f8f3a1b3f7e
   m_configObjects:

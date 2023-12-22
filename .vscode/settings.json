@@ -58,5 +58,5 @@
         "**/*.uxml": false,
         "**/*.uss": false
     },
-    "dotnet.defaultSolution": "TDN2_03_RPG.sln"
+    "dotnet.defaultSolution": "ReturnToTheMoon.sln"
 }
