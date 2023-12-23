@@ -1,6 +1,6 @@
 # GDD Return to the Moon
 
-Última Revisión: v1.0.1, *(22/12/2023)*
+Última Revisión: v1.0.2, *(22/12/2023)*
 
 ## Resumen
 
@@ -315,8 +315,6 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
     - Exclamación
     - Garra
     - Ataque de puma
-  - Animaciones de personaje
-    - ejemplo
 
 # License 
 "Return to the Moon GDD" Originally written by Julián Abaroa and Sara San Martín *(21/12/2023)*
