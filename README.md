@@ -300,6 +300,7 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
   - Pausa
   - Radial de volumen
   - Splash art (WIP)
+  - Fuente: Kindness ([Link](https://www.dafont.com/kindness.font), Created by Bianca Groff)
 - VFX
   - Animaciones de personaje 
     - Player Run
