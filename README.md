@@ -1,6 +1,6 @@
 # GDD Return to the Moon
 
-Última Revisión: v1.0.0, *(22/12/2023)*
+Última Revisión: v1.0.1, *(22/12/2023)*
 
 ## Resumen
 
@@ -208,7 +208,7 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
   - Avispas
   
 - Lista de entornos (Arte)
-    - Main Menu ()
+    - Main Menu (Starbound)
 	- Mitad de un cerro, principalmente seco, camino de tierra, de día.
     - Atardecer -> Noche, cerro, principalmente río.
     - (Climax) Punta del cerro, Amanacer -> Tormenta. 
