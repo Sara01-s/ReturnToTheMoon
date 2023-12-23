@@ -1,6 +1,6 @@
 # GDD Return to the Moon
 
-Última Revisión: v0.0.4, *(22/12/2023)*
+Última Revisión: v1.0.0, *(22/12/2023)*
 
 ## Resumen
 
@@ -208,6 +208,7 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
   - Avispas
   
 - Lista de entornos (Arte)
+    - Main Menu ()
 	- Mitad de un cerro, principalmente seco, camino de tierra, de día.
     - Atardecer -> Noche, cerro, principalmente río.
     - (Climax) Punta del cerro, Amanacer -> Tormenta. 
@@ -241,7 +242,14 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
     	   - Cambio a `Stamina [Cansado]`
     	   - Cambio a `Stamina [Exhausto]`
     	   - Cambio a `Stamina [Fatiga]`
-  	   
+	- Enemigos
+    	- Puma escondido
+    	- Rugido de puma
+    	- Chillido de aguila
+    	- Rasguño de aguila
+    	- Avispas
+    	- Picadura de avispas
+    	- Sonido de daño
   - Lista de sonidos (Ambiente)
     - Viento
     - Atravesar por follaje. 
@@ -249,7 +257,6 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
       - Pumas
       - Aves depredadoras
       - Avispas
-      
   - Lista de sonidos (Música)
     - Main Menu (Cuna) (Loop)
     - Intro cinematic (Misterioso, Espacial)
@@ -288,12 +295,26 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
     - Parallax (Sara)
   - Levels
     - "Level Manager"
-
--- break --
-
-- Animación
-  - Animaciones de entorno 
-    - ejemplo 
+- UI
+  - Flechas
+  - Pausa
+  - Radial de volumen
+  - Splash art (WIP)
+- VFX
+  - Animaciones de personaje 
+    - Player Run
+    - Player Boosted
+    - Player Walk
+    - Player Walk Cansado
+    - Player Walk Exhausto
+    - Player Walk Fatigado
+    - Player Dodge (WIP variaciones)
+    - Player Hitted (WIP variaciones)
+  - Efectos
+    - Sorpresa QTE
+    - Exclamación
+    - Garra
+    - Ataque de puma
   - Animaciones de personaje
     - ejemplo
 
