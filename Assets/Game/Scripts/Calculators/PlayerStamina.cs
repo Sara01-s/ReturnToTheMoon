@@ -17,12 +17,17 @@ namespace Game {
         internal StaminaState CurrentStaminaState;
 
         [SerializeField] private FloatResourceRx _reactiveStamina;
+        [SerializeField] private float _initialValue;
 
         private const float MAX_THRESHOLD = 100.0f;
         private const float NORMAL_THRESHOLD = 66.6f;
         private const float TIRED_THRESHOLD = 33.3f;
         private const float EXHAUSTED_THRESHOLD = 0.1f;
         private const float FATIGUED_THRESHOLD = 0.0f;
+
+        private void Awake() {
+            _reactiveStamina.Value = _initialValue;
+        }
 
         private void OnEnable() {
             _reactiveStamina.Observable.Subscribe(UpdateStaminaState);
@@ -48,7 +53,7 @@ namespace Game {
                 CurrentStaminaState = StaminaState.Fatigued;
             }
 
-            //Debug.Log("Current StaminaState: " + CurrentStaminaState);
+            Debug.Log("CurrentStamina: " + stamina + " Current StaminaState: " + CurrentStaminaState);
         }
 
     }

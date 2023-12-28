@@ -16,11 +16,11 @@ namespace Game {
 
         [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
 
-        private bool _tapped;
-
         private float _hazardBoostTimer;
         private float _hazardSlowDownTimer;
         private float _slowDownTimer;
+        
+        private bool _tapped;
 
         private void Awake() {
             _hazardSlowDownTimer = HAZARD_QTE_SLOWDOWN_DURATION;

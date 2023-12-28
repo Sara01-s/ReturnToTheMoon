@@ -4,6 +4,7 @@ namespace Game {
 
     internal sealed class PlayerSpeed : MonoBehaviour {
 
+        // Should be const and not serialized?
         [SerializeField] internal float VerySlow = 1.0f;
         [SerializeField] internal float Slow = 1.25f;
         [SerializeField] internal float Neutral = 1.5f;

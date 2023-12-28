@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 1439702542}
   - component: {fileID: 1439702543}
   - component: {fileID: 1439702536}
+  - component: {fileID: 1439702545}
   - component: {fileID: 1439702538}
   - component: {fileID: 1439702541}
   - component: {fileID: 1439702540}
@@ -421,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reactiveStamina: {fileID: 11400000, guid: 50946788c2ec29448b35f2a2a844e47b, type: 2}
+  _initialValue: 100
 --- !u!114 &1439702539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,6 +601,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1439702545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439702534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f0b11736992db4690d5810632959db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHealth: {fileID: 11400000, guid: a00dc10131e7d1344998fe6b33143805, type: 2}
+  MAX_HEALTH: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

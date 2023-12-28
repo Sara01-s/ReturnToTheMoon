@@ -5,6 +5,7 @@ namespace Game {
 
     internal sealed class PlayerLDR : MonoBehaviour {
         
+        // Should be const and not serialized?
         [SerializeField] internal float MIN_LDR = -0.5f;
         [SerializeField] internal float BETWEEN_MIN_DEFAULT_LDR = -0.7f;
         [SerializeField] internal float DEFAULT_LDR = -1.0f;
