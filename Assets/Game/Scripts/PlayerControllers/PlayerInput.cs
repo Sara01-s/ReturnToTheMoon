@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace Game {
     
     internal sealed class PlayerInput : MonoBehaviour {
     
-        internal delegate void _onInput(Touch touch);
+        internal delegate void _inputDelegate(Touch touch);
+        internal static _inputDelegate OnInput;
 
-        internal static _onInput OnInput;
+        private static _inputDelegate _defaultInput;
 
         private void Update() {
 
@@ -20,6 +22,17 @@ namespace Game {
             if (touch.phase == TouchPhase.Stationary) {
                 OnInput?.Invoke(touch);
             }
+        }
+
+        internal static void SetDefaultInput(_inputDelegate inputDelegate) {
+            _defaultInput = inputDelegate;  
+            OnInput = _defaultInput;
+        }
+
+        internal static void Reset() {
+            if (_defaultInput == null) return;
+
+            OnInput = _defaultInput;
         }
 
     }

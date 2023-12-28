@@ -17,7 +17,6 @@ namespace Game {
         [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
 
         private bool _tapped;
-        private bool _initiated;
 
         private float _hazardBoostTimer;
         private float _hazardSlowDownTimer;
@@ -33,7 +32,6 @@ namespace Game {
             if (collision.CompareTag("Player")) {
                 PlayerInput.OnInput = Tapped;
 
-                if (_initiated) return;
                 StartCoroutine(CO_INITQTE());
             }
         }
@@ -44,7 +42,6 @@ namespace Game {
         }
 
         private IEnumerator CO_INITQTE() {
-            _initiated = true;
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSeconds(_preparationTimeInSeconds);
             print("Terminado el tiempo de preparacion...");
@@ -55,22 +52,22 @@ namespace Game {
                 
                 if (_tapped) {
                     tapCounter++;
-                    print("TapCounter: " + tapCounter);
+                   print("TapCounter: " + tapCounter);
                 }
                 _tapped = false;
                 
                 yield return null;
             }
 
-            _initiated = false;
+            PlayerInput.Reset();
             _slowDownTimer = QTE_SLOWDOWN_DURATION;
             if (tapCounter >= QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_BOOST());
-            if (tapCounter <= QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_DECREASE());
+            if (tapCounter < QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_DECREASE());
         }
 
         private IEnumerator CO_BOOST() {
             _reactiveSpeed.Value = _playerSpeed.Fast;
-            print("Well Done!");
+            print("Logrado");
 
             while (_hazardBoostTimer > 0.0f) {
                 _hazardBoostTimer -= Time.deltaTime;
@@ -83,7 +80,7 @@ namespace Game {
 
         private IEnumerator CO_DECREASE() {
             _reactiveSpeed.Value = _playerSpeed.VerySlow;
-            print("Bad!");
+            print("No logrado");
 
             while (_hazardSlowDownTimer > 0.0f) {
                 _hazardSlowDownTimer -= Time.deltaTime;

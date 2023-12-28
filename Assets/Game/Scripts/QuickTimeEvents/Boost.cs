@@ -27,7 +27,7 @@ namespace Game {
         }
     
         private void OnEnable() {
-            PlayerInput.OnInput = Boosted;
+            PlayerInput.SetDefaultInput(Boosted);
         }
         private void OnDisable() {
             PlayerInput.OnInput = null;
@@ -43,6 +43,8 @@ namespace Game {
             _reactiveSpeed.Value = _playerSpeed.Fast;
             _reactiveStamina.Value -= DEFAULT_BOOST_COST;
             _reactiveLDR.Value = _playerLDR.BETWEEN_MIN_DEFAULT_LDR;
+
+            Debug.Log("Boosted");
 
             while (_boostDurationTimer > 0.0f) {
                 _boostDurationTimer -= Time.deltaTime;

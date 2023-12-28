@@ -159,7 +159,7 @@ MonoBehaviour:
   QTE_SLOWDOWN_DURATION: 3
   HAZARD_QTE_SLOWDOWN_DURATION: 2
   HAZARD_QTE_BOOST_DURATION: 2
-  QTE_SPEED_INPUTCOUNT: 10
+  QTE_SPEED_INPUTCOUNT: 12
 --- !u!4 &512921856
 Transform:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ Transform:
   m_GameObject: {fileID: 1439702534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalPosition: {x: 0, y: 12.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -533,7 +533,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
