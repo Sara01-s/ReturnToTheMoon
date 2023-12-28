@@ -1,6 +1,6 @@
 # GDD Return to the Moon
 
-Última Revisión: v0.0.4, *(22/12/2023)*
+Última Revisión: v1.0.2, *(22/12/2023)*
 
 ## Resumen
 
@@ -165,11 +165,25 @@ Durante el juego, el jugador deberá gestionar **4 recursos**:
     - En una situación real, la `[Stamina]` solo te importará cuando este cerca del rango de `[Fatiga]`, pues al ser menor o igual que `0`, tu `[Rapidez]` se establecerá en `[Muy lento]` y entrarás en estado de `[Fatiga]` durante`[BURNOUT_DURATION]` segundos. En este estado, no podrás utilizar `[Input]`, lo cual puede ser mortal. La `[Stamina]` volverá a crecer hasta `[MAX_STAMINA]` en `[STAMINA_REFILL_DURATION]` segundos.
 
 ### Elementos Interactivos
-- Boost Quick Time Event
-  - Un elemento que ralentizará el tiempo por `[BOOST_SLOWDOWN_DURATION]` segundos, tendrás `[BOOST_TIMEWINDOW_DURATION]` segundos para reaccionar y presionar `[Input]`.
 
-**(WIP)...**
+- Evento de Sigilo
+  - Al entrar una zona de Sigilo, deberás mantener presionado `[Input]` durante `[STEATH_EVENT_DURATION]`, dependiendo de tu resultado se penalizará o recompensará.
 
+- Boost default
+  - Esta es la mecánica principal del juego, Presionar `[Input]` fuera de cualquier `Elemento Interactivo`, le dará el jugador la `[Rapidez] = [Rápida]` durante `[DEFAULT_BOOST_DURATION]`, esta interacción tendrá un cooldown predeterminado (`[DEFAULT_BOOST_MAX_COOLDOWN]`).
+  - Solo podrás efectuar esta interacción si `[DEFAULT_BOOST_CURRENT_COOLDOWN] <= 0`.
+
+- Quick Time Event de Reacción
+  - Un elemento que ralentizará el tiempo por `[QTE_SLOWDOWN_DURATION]` segundos, tendrás `[QTE_TIMEWINDOW_DURATION]` segundos para reaccionar y presionar `[Input]`.
+  
+- Quick Time Event de Precisión
+  - Un elemento que ralentizará el tiempo por `[QTE_SLOWDOWN_DURATION]` segundos, tendrás que presionar `[Input]`, dentro de un rango de tiempo específico para superar el evento.
+
+- Quick Time Event de Velocidad
+  - Un elemento que ralentizará el tiempo por `[QTE_SLOWDOWN_DURATION]` segundos, tendrás que presionar `[Input]` `[QTE_SPEED_INPUTCOUNT]` veces para superar el evento. 
+
+- (WIP) Durante un nivel musical tendrás que presionar `[Input]` al ritmo de la música para obtener el `Boost default`. NO habrá más elementos interactivos.
+  
 Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *(casillas vacías son imposibles de obtener)*:
 
 | Ejemplos de eventos interactivos (Riesgo/Recompensa) | Gran penalización | Penalización    | Neutral | Recompensa                         | Gran Recompensa  |
@@ -178,40 +192,130 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
 | Evento de Sigilo               | [Rapidez] = [Muy Lento] por [BIG_DELAY_DURATION] segundos        | [Rapidez] = [Lento] por [STEALTH_EVENT_DURATION] segundos.     |         |                               |              |
 | Boost default        |              | [Stamina] -= [DEFAULT_BOOST_COST] |         | [Rapidez] = [Rápido] durante [DEFAULT_BOOST_DURATION] segundos, [LDR] = [-0.7h/s] durante [DEFAULT_BOOST_DURATION] segundos y [DEFAULT_BOOST_CURRENT_COOLDOWN] = [DEFAULT_BOOST_MAX_COOLDOWN] |              |
 | Hazard QTE            | [Rapidez] = [Muy Lento] por [HAZARD_QTE_DELAY_DURATION] segundos        |           |      |         [Rapidez] = [Rapido] durante [HAZARD_QTE_BOOST_DURATION] segundos                      |              |
-| Boost Musical (Por verse)       |              | [Rapidez] = [Lento] por [RHYTHM_DELAY_DURATION] segundos     |         | [Rapidez] = [Rápido] por [RHYTHM_BOOST_DURATION] segundos   
+| Boost Musical (WIP)       |              | [Rapidez] = [Lento] por [RHYTHM_DELAY_DURATION] segundos     |         | [Rapidez] = [Rápido] por [RHYTHM_BOOST_DURATION] segundos   
 
 ### Activos necesarios.
-- 2D
 - Datos necesarios
+  - Tiempo total del nivel.
+  - Tiempo total del juego completado.
+  - Horas jugadas.
+  - Boost defaults usados por recompensa auxiliar.
 
 - Lista de personajes
-  - Character #1
-  - Character #2
-  - Character #3
+  - Protagonista (Moon Bird). Referencias: Luna menguante (Mapa), Colibrí, avión (cola), pato (cola), cisne (color blanco).
+  - Pumas
+  - Ave depredadora
+  - Avispas
   
 - Lista de entornos (Arte)
-	- Example #1
-    - Example #2 
-    - Example #3
+    - Main Menu (Starbound)
+	- Mitad de un cerro, principalmente seco, camino de tierra, de día.
+    - Atardecer -> Noche, cerro, principalmente río.
+    - (Climax) Punta del cerro, Amanacer -> Tormenta. 
 
 - Sonido
+  - Lista de sonidos (SFX)
+    - Jugador
+      - Pasos
+        - Tierra Normal/Running
+        - Pasto Normal/Running
+        - Roca Normal/Running
+        - Agua Normal/Running
+        - Gravilla Normal/Running
+      - QTES
+        - Comienzo
+          - Reacción
+          - Presición
+          - Rapidez
+		- Input Presionado
+        - Ventana de tiempo (Solo para Reacción)
+        - Momento correcto (Solo para Presición)
+        - Acierto
+        - Error
+	   - Interacciones
+    	   - Cambio a `Rapidez [Muy Lento]`
+    	   - Cambio a `Rapidez [Lento]`
+    	   - Cambio a `Rapidez [Normal]`
+    	   - Cambio a `Rapidez [Rápido]`
+    	   - Cambio a `Rapidez [Muy Rápido]`
+    	   - Cambio a `Stamina [Normal]`
+    	   - Cambio a `Stamina [Cansado]`
+    	   - Cambio a `Stamina [Exhausto]`
+    	   - Cambio a `Stamina [Fatiga]`
+	- Enemigos
+    	- Puma escondido
+    	- Rugido de puma
+    	- Chillido de aguila
+    	- Rasguño de aguila
+    	- Avispas
+    	- Picadura de avispas
+    	- Sonido de daño
   - Lista de sonidos (Ambiente)
-    - Level 1
-    - Level 2 
-    - Level 3
-  - Lista de sonidos (Jugador)
+    - Viento
+    - Atravesar por follaje. 
+    - Animales
+      - Pumas
+      - Aves depredadoras
+      - Avispas
+  - Lista de sonidos (Música)
+    - Main Menu (Cuna) (Loop)
+    - Intro cinematic (Misterioso, Espacial)
+    - Level_01 (Melancólica/Ansiosa/Aventurera)
+    - Level_02 (Aventurera/Alerta)
+    - Level_03_01 (Piano lento)
+    - Level_03_02 (Epic)
+    - Level_03_03 (Epic / Conclusion)
   
 - Código
   - Controlador de personaje
+    - Player Movement
+    - Player Animation
+    - Player Sounds
+    - Player Input
   - Calculadoras
-  - QTES
-  - etc..
-
-- Animación
-  - Animaciones de entorno 
-    - ejemplo 
-  - Animaciones de personaje
-    - ejemplo
+    - (Tool) Level info calculator
+    - Distance calculator
+    - (abstract) Resource
+      - Player Health
+      - Player LDR
+      - Player Speed
+      - Player Stamina
+  - Quick Time events
+    - (abstract) QTE
+      - QTE_Reaction
+      - QTE_Reaction_Animation
+      - QTE_Reaction_Sounds
+      - QTE_Precision
+      - QTE_Precision_Animation
+      - QTE_Precision_Sounds
+      - QTE_Tap
+      - QTE_Tap_Animation
+      - QTE_Tap_Sounds
+  - Entorno
+    - Parallax (Sara)
+  - Levels
+    - "Level Manager"
+- UI
+  - Flechas
+  - Pausa
+  - Radial de volumen
+  - Splash art (WIP)
+  - Fuente: Kindness ([Link](https://www.dafont.com/kindness.font), Created by Bianca Groff)
+- VFX
+  - Animaciones de personaje 
+    - Player Run
+    - Player Boosted
+    - Player Walk
+    - Player Walk Cansado
+    - Player Walk Exhausto
+    - Player Walk Fatigado
+    - Player Dodge (WIP variaciones)
+    - Player Hitted (WIP variaciones)
+  - Efectos
+    - Sorpresa QTE
+    - Exclamación
+    - Garra
+    - Ataque de puma
 
 # License 
 "Return to the Moon GDD" Originally written by Julián Abaroa and Sara San Martín *(21/12/2023)*
