@@ -17,10 +17,12 @@ namespace Game {
         internal StaminaState CurrentStaminaState;
 
         [SerializeField] private FloatResourceRx _reactiveStamina;
-        [SerializeField] private float NORMAL_THRESHOLD = 66.6f;
-        [SerializeField] private float TIRED_THRESHOLD = 33.3f;
-        [SerializeField] private float EXHAUSTED_THRESHOLD = 0.1f;
-        [SerializeField] private float FATIGUED_THRESHOLD = 0.0f;
+
+        private const float MAX_THRESHOLD = 100.0f;
+        private const float NORMAL_THRESHOLD = 66.6f;
+        private const float TIRED_THRESHOLD = 33.3f;
+        private const float EXHAUSTED_THRESHOLD = 0.1f;
+        private const float FATIGUED_THRESHOLD = 0.0f;
 
         private void OnEnable() {
             _reactiveStamina.Observable.Subscribe(UpdateStaminaState);
@@ -31,18 +33,18 @@ namespace Game {
 
         private void UpdateStaminaState(float stamina) {
 
-            stamina = clamp(stamina, 0.0f, 100.0f);
+            stamina = clamp(stamina, FATIGUED_THRESHOLD, MAX_THRESHOLD);
 
-            if (Common.IsBetween(stamina, 66.6f, 100.0f)) {
+            if (Common.IsBetween(stamina, NORMAL_THRESHOLD, MAX_THRESHOLD)) {
                 CurrentStaminaState = StaminaState.Normal;
             }
-            else if (Common.IsBetween(stamina, 33.3f, 66.6f)) {
+            else if (Common.IsBetween(stamina, TIRED_THRESHOLD, NORMAL_THRESHOLD)) {
                 CurrentStaminaState = StaminaState.Tired;
             }
-            else if (Common.IsBetween(stamina, 0.1f, 33.3f)) {
+            else if (Common.IsBetween(stamina, EXHAUSTED_THRESHOLD, TIRED_THRESHOLD)) {
                 CurrentStaminaState = StaminaState.Exhausted;
             }
-            else if (Common.IsBetween(stamina, 0.0f, 0.1f)) {
+            else if (Common.IsBetween(stamina, FATIGUED_THRESHOLD, EXHAUSTED_THRESHOLD)) {
                 CurrentStaminaState = StaminaState.Fatigued;
             }
 
