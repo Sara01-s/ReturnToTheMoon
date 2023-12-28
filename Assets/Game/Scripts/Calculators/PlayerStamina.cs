@@ -48,7 +48,7 @@ namespace Game {
                 CurrentStaminaState = StaminaState.Fatigued;
             }
 
-            Debug.Log("Current StaminaState: " + CurrentStaminaState);
+            //Debug.Log("Current StaminaState: " + CurrentStaminaState);
         }
 
     }

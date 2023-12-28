@@ -6,16 +6,18 @@ namespace Game {
     internal sealed class TapQTE : MonoBehaviour {
 
         [SerializeField] private FloatResourceRx _reactiveSpeed;
-
         [SerializeField] private PlayerSpeed _playerSpeed;
+        
+        [SerializeField] private float _preparationTimeInSeconds;
 
+        [SerializeField]  private float QTE_SLOWDOWN_DURATION;
         [SerializeField]  private float HAZARD_QTE_SLOWDOWN_DURATION;
         [SerializeField]  private float HAZARD_QTE_BOOST_DURATION;
-        [SerializeField]  private float QTE_SLOWDOWN_DURATION;
+
         [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
 
-        private float _preparationTimeInSeconds;
         private bool _tapped;
+        private bool _initiated;
 
         private float _hazardBoostTimer;
         private float _hazardSlowDownTimer;
@@ -29,8 +31,9 @@ namespace Game {
 
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.CompareTag("Player")) {
-                print("Iniciado");
                 PlayerInput.OnInput = Tapped;
+
+                if (_initiated) return;
                 StartCoroutine(CO_INITQTE());
             }
         }
@@ -41,19 +44,25 @@ namespace Game {
         }
 
         private IEnumerator CO_INITQTE() {
+            _initiated = true;
+            print("Esperando el tiempo de preparacion...");
             yield return new WaitForSeconds(_preparationTimeInSeconds);
-
+            print("Terminado el tiempo de preparacion...");
             var tapCounter = 0;
 
             while (_slowDownTimer > 0.0f) {
                 _slowDownTimer -= Time.deltaTime;
+                
                 if (_tapped) {
                     tapCounter++;
+                    print("TapCounter: " + tapCounter);
                 }
                 _tapped = false;
-                print(tapCounter);
+                
+                yield return null;
             }
 
+            _initiated = false;
             _slowDownTimer = QTE_SLOWDOWN_DURATION;
             if (tapCounter >= QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_BOOST());
             if (tapCounter <= QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_DECREASE());
@@ -61,6 +70,7 @@ namespace Game {
 
         private IEnumerator CO_BOOST() {
             _reactiveSpeed.Value = _playerSpeed.Fast;
+            print("Well Done!");
 
             while (_hazardBoostTimer > 0.0f) {
                 _hazardBoostTimer -= Time.deltaTime;
@@ -73,6 +83,7 @@ namespace Game {
 
         private IEnumerator CO_DECREASE() {
             _reactiveSpeed.Value = _playerSpeed.VerySlow;
+            print("Bad!");
 
             while (_hazardSlowDownTimer > 0.0f) {
                 _hazardSlowDownTimer -= Time.deltaTime;
