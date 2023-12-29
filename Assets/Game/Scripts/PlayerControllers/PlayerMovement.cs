@@ -24,7 +24,7 @@ namespace Game {
             _reactiveSpeed.Value = _startSpeed.Neutral;
         }
 
-        private void Update() {
+        private void LateUpdate() {
             _camera.position = new Vector3(transform.position.x, transform.position.y, _camera.position.z);
         }
 
