@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Game {
@@ -8,14 +9,15 @@ namespace Game {
         [SerializeField] private FloatResourceRx _reactiveSpeed;
         [SerializeField] private PlayerSpeed _playerSpeed;
         
+        [SerializeField] private float _timeSlow;
         [SerializeField] private float _preparationTimeInSeconds;
 
+        [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
         [SerializeField]  private float QTE_SLOWDOWN_DURATION;
         [SerializeField]  private float HAZARD_QTE_SLOWDOWN_DURATION;
         [SerializeField]  private float HAZARD_QTE_BOOST_DURATION;
 
-        [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
-
+        private const float _defaultTimeScale = 1.0f;
         private float _hazardBoostTimer;
         private float _hazardSlowDownTimer;
         private float _slowDownTimer;
@@ -26,6 +28,8 @@ namespace Game {
             _hazardSlowDownTimer = HAZARD_QTE_SLOWDOWN_DURATION;
             _hazardBoostTimer = HAZARD_QTE_BOOST_DURATION;
             _slowDownTimer = QTE_SLOWDOWN_DURATION;
+
+            _preparationTimeInSeconds *= _timeSlow;
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
@@ -42,9 +46,11 @@ namespace Game {
         }
 
         private IEnumerator CO_INITQTE() {
+            Time.timeScale = _timeSlow;
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSeconds(_preparationTimeInSeconds);
             print("Terminado el tiempo de preparacion...");
+            Time.timeScale = _defaultTimeScale;
             var tapCounter = 0;
 
             while (_slowDownTimer > 0.0f) {
