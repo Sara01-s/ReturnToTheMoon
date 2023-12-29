@@ -17,8 +17,7 @@ namespace Game {
         // TEMPORAL
         [SerializeField] private Transform _camera;
 
-        private const float RAYCAST_DISTANCE = 1.0f;
-        private float _floatMargin = 0.5f;
+        private const float RAYCAST_DISTANCE = 2.0f;
 
         private void Awake() {
             _reactiveSpeed.Value = _startSpeed.Neutral;
@@ -45,7 +44,7 @@ namespace Game {
                 Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 45.0f);
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, finalRotation.eulerAngles.z);
 
-                transform.position = new Vector2(transform.position.x, avaragePoint.y + transform.up.y * 0.5f); // Genera el movimiento erratico en Y
+                transform.position = new Vector2(transform.position.x, avaragePoint.y + transform.up.y * 0.75f); // Genera el movimiento erratico en Y
                 // Fin.
                 _rigidBody.velocity = new Vector2(_reactiveSpeed.Value, _rigidBody.velocity.y) * transform.right;          
             }
