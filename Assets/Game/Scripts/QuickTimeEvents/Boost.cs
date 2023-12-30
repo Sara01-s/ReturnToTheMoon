@@ -44,14 +44,14 @@ namespace Game {
             _reactiveStamina.Value -= DEFAULT_BOOST_COST;
             _reactiveLDR.Value = _playerLDR.BETWEEN_MIN_DEFAULT_LDR;
 
-            Debug.Log("Boost started");
+            //Debug.Log("Boost started");
 
             while (_boostDurationTimer > 0.0f) {
                 _boostDurationTimer -= Time.deltaTime;
                 yield return null;
             }
 
-            Debug.Log("Boost ended");
+            //Debug.Log("Boost ended");
             
             _reactiveSpeed.Value = _playerSpeed.Neutral;
             _reactiveLDR.Value = _playerLDR.DEFAULT_LDR;

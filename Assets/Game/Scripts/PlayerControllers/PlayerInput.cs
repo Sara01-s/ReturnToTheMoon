@@ -10,11 +10,15 @@ namespace Game {
 
         private static _inputDelegate _defaultInput;
 
+        internal static TouchPhase CurrentTouchPhase;
+
         private void Update() {
 
             if (Input.touchCount == 0) return;
 
             Touch touch = Input.GetTouch(0);
+
+            CurrentTouchPhase = touch.phase;
 
             if (touch.phase == TouchPhase.Began) {
                 OnInput?.Invoke(touch);
