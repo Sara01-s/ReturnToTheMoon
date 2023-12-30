@@ -9,7 +9,6 @@ namespace Game {
         [SerializeField] private PlayerSpeed _playerSpeed;
         
         [SerializeField] private float _timeSlow;
-        [SerializeField] private float _preparationTimeInSeconds;
 
         [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
         [SerializeField]  private float QTE_SLOWDOWN_DURATION;
@@ -30,7 +29,7 @@ namespace Game {
             _slowDownTimer = QTE_SLOWDOWN_DURATION;
 
             if (_timeSlow > 0.0f) {
-                _preparationTimeInSeconds *= _timeSlow;
+                _slowDownTimer *= _timeSlow; // Normalizar el tiempo debido al cambio en el timeScale.
             }
         }
 
@@ -50,10 +49,8 @@ namespace Game {
 
         private IEnumerator CO_INITQTE() {
             Time.timeScale = _timeSlow;
-            print("Esperando el tiempo de preparacion...");
-            yield return new WaitForSeconds(_preparationTimeInSeconds);
-            print("Terminado el tiempo de preparacion...");
-            Time.timeScale = DEFAULT_TIME_SCALE;
+            print("TapTapTap!");
+            
             var tapCounter = 0;
 
             while (_slowDownTimer > 0.0f) {
@@ -67,6 +64,9 @@ namespace Game {
                 
                 yield return null;
             }
+
+            Time.timeScale = DEFAULT_TIME_SCALE;
+            print("Stop!");
 
             PlayerInput.Reset();
             _slowDownTimer = QTE_SLOWDOWN_DURATION;

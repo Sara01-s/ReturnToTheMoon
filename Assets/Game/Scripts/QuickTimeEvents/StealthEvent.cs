@@ -26,7 +26,7 @@ namespace Game {
             _bigDelayTimer = BIG_DELAY_DURATION;
 
             if (_timeSlow > 0.0f) {
-                _preparationTimeInSeconds *= _timeSlow;
+                _preparationTimeInSeconds *= _timeSlow; // Normalizar el tiempo debido al cambio en el timeScale.
             }
         }
 

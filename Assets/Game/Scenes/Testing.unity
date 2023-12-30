@@ -171,7 +171,6 @@ MonoBehaviour:
   _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
   _playerSpeed: {fileID: 1439702541}
   _timeSlow: 0.2
-  _preparationTimeInSeconds: 2
   QTE_SPEED_INPUTCOUNT: 12
   QTE_SLOWDOWN_DURATION: 3
   HAZARD_QTE_SLOWDOWN_DURATION: 2
@@ -503,7 +502,6 @@ MonoBehaviour:
   _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
   _playerSpeed: {fileID: 1439702541}
   _timeSlow: 0.2
-  _preparationTimeInSeconds: 2
   QTE_SPEED_INPUTCOUNT: 12
   QTE_SLOWDOWN_DURATION: 3
   HAZARD_QTE_SLOWDOWN_DURATION: 2
@@ -734,7 +732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &672870365
 Transform:
   m_ObjectHideFlags: 0
@@ -809,7 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
   _playerSpeed: {fileID: 1439702541}
-  _preparationTimeInSeconds: 2
+  _preparationTimeInSeconds: 0.000001
   _timeSlow: 0.2
 --- !u!1 &687731991
 GameObject:
@@ -2228,13 +2226,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1806297375}
   - component: {fileID: 1806297376}
+  - component: {fileID: 1806297377}
   m_Layer: 0
   m_Name: ReactionQTE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1806297375
 Transform:
   m_ObjectHideFlags: 0
@@ -2295,6 +2294,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &1806297377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806297374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b50987e6713e6d4490ac1ce64e7ef6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1873720109
 GameObject:
   m_ObjectHideFlags: 0
