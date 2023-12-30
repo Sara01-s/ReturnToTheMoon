@@ -5,7 +5,7 @@ namespace Game {
     
     internal sealed class PlayerInput : MonoBehaviour {
     
-        internal delegate void _inputDelegate(Touch touch);
+        internal delegate void _inputDelegate();
         internal static _inputDelegate OnInput;
 
         private static _inputDelegate _defaultInput;
@@ -21,10 +21,10 @@ namespace Game {
             CurrentTouchPhase = touch.phase;
 
             if (touch.phase == TouchPhase.Began) {
-                OnInput?.Invoke(touch);
+                OnInput?.Invoke();
             }
             if (touch.phase == TouchPhase.Stationary) {
-                OnInput?.Invoke(touch);
+                OnInput?.Invoke();
             }
         }
 

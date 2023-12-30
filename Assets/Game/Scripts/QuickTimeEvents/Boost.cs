@@ -33,8 +33,8 @@ namespace Game {
             PlayerInput.OnInput = null;
         }
 
-        private void Boosted(Touch touch) {
-            if (_boosted || touch.phase != TouchPhase.Began) return;
+        private void Boosted() {
+            if (_boosted || PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
             _boosted = true;
             StartCoroutine(CO_BOOSTED());
         }
@@ -44,14 +44,14 @@ namespace Game {
             _reactiveStamina.Value -= DEFAULT_BOOST_COST;
             _reactiveLDR.Value = _playerLDR.BETWEEN_MIN_DEFAULT_LDR;
 
-            //Debug.Log("Boost started");
+            Debug.Log("Boost started");
 
             while (_boostDurationTimer > 0.0f) {
                 _boostDurationTimer -= Time.deltaTime;
                 yield return null;
             }
 
-            //Debug.Log("Boost ended");
+            Debug.Log("Boost ended");
             
             _reactiveSpeed.Value = _playerSpeed.Neutral;
             _reactiveLDR.Value = _playerLDR.DEFAULT_LDR;

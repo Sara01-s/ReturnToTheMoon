@@ -9,10 +9,12 @@ namespace Game {
         [SerializeField] private FloatResourceRx _reactiveSpeed;
         [SerializeField] private PlayerSpeed _playerSpeed;
         [SerializeField] private float _preparationTimeInSeconds;
+        [SerializeField] private float _timeSlow;
 
         private const float STEALTH_EVENT_DURATION = 5.0f;
         private const float DELAY_DURATION = 1.5f;
         private const float BIG_DELAY_DURATION = 3.0f;
+        private const float DEFAULT_TIME_SCALE = 1.0f;
 
         private float _stealthEventTimer;
         private float _delayTimer;
@@ -22,6 +24,10 @@ namespace Game {
             _stealthEventTimer = STEALTH_EVENT_DURATION;
             _delayTimer = DELAY_DURATION;
             _bigDelayTimer = BIG_DELAY_DURATION;
+
+            if (_timeSlow > 0.0f) {
+                _preparationTimeInSeconds *= _timeSlow;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider) {
@@ -32,14 +38,16 @@ namespace Game {
             }
         }
 
-        private void Pressed(Touch touch) {
+        private void Pressed() {
             // Otros eventos(?
         }
 
         private IEnumerator CO_INITQTE() {
+            Time.timeScale = _timeSlow;
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSeconds(_preparationTimeInSeconds);
             print("Terminado el tiempo de preparacion...");
+            Time.timeScale = DEFAULT_TIME_SCALE;
 
             while (_stealthEventTimer > 0.0f) {
                 _stealthEventTimer -= Time.deltaTime;

@@ -16,19 +16,22 @@ namespace Game {
         [SerializeField]  private float HAZARD_QTE_SLOWDOWN_DURATION;
         [SerializeField]  private float HAZARD_QTE_BOOST_DURATION;
 
-        private const float _defaultTimeScale = 1.0f;
+        private const float DEFAULT_TIME_SCALE = 1.0f;
+
         private float _hazardBoostTimer;
         private float _hazardSlowDownTimer;
         private float _slowDownTimer;
-        
-        private bool _tapped;
 
+        private bool _tapped;
+        
         private void Awake() {
             _hazardSlowDownTimer = HAZARD_QTE_SLOWDOWN_DURATION;
             _hazardBoostTimer = HAZARD_QTE_BOOST_DURATION;
             _slowDownTimer = QTE_SLOWDOWN_DURATION;
 
-            _preparationTimeInSeconds *= _timeSlow;
+            if (_timeSlow > 0.0f) {
+                _preparationTimeInSeconds *= _timeSlow;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
@@ -39,9 +42,10 @@ namespace Game {
             }
         }
 
-        private void Tapped(Touch touch) {
-            if (touch.phase != TouchPhase.Began) return;
+        private void Tapped() {
+            if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
             _tapped = true;
+            // Otras cosas(?
         }
 
         private IEnumerator CO_INITQTE() {
@@ -49,7 +53,7 @@ namespace Game {
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSeconds(_preparationTimeInSeconds);
             print("Terminado el tiempo de preparacion...");
-            Time.timeScale = _defaultTimeScale;
+            Time.timeScale = DEFAULT_TIME_SCALE;
             var tapCounter = 0;
 
             while (_slowDownTimer > 0.0f) {
@@ -57,9 +61,9 @@ namespace Game {
                 
                 if (_tapped) {
                     tapCounter++;
-                   print("TapCounter: " + tapCounter);
+                    print("TapCounter: " + tapCounter);
+                    _tapped = false;
                 }
-                _tapped = false;
                 
                 yield return null;
             }
