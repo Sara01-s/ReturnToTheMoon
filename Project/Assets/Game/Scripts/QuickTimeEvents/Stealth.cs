@@ -39,7 +39,6 @@ namespace Game {
                 yield return null;
             }
 
-            PlayerInput.Reset();
             StartCoroutine(CO_Win());
         }
 
@@ -53,6 +52,8 @@ namespace Game {
                 yield return null;
             }
 
+            PlayerInput.Reset();
+            _OnTimeEvent = false;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
@@ -66,6 +67,8 @@ namespace Game {
                 yield return null;
             }
 
+            PlayerInput.Reset();
+            _OnTimeEvent = false;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 

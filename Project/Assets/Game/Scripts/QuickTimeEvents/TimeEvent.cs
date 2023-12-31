@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 using Mono.Cecil;
+using UnityEngine.PlayerLoop;
 
 namespace Game {
 
@@ -13,6 +14,7 @@ namespace Game {
         [SerializeField, Range(0.1f, 5.0f)] protected float _eventDuration;
         
         protected const float DEFAULT_TIMESCALE = 1.0f;
+        protected static bool _OnTimeEvent;
 
         protected abstract IEnumerator CO_InitQTE();
         protected abstract IEnumerator CO_Win();
@@ -20,7 +22,8 @@ namespace Game {
         protected abstract void Input();
 
         protected virtual void OnTriggerEnter2D(Collider2D collider) {
-            if (collider.CompareTag("Player")) {
+            if (collider.CompareTag("Player") && !_OnTimeEvent) {
+                _OnTimeEvent = true;
                 PlayerInput.OnInput = Input;
                 StartCoroutine(CO_InitQTE());
             }

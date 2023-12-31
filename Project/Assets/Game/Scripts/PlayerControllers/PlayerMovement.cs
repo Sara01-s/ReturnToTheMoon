@@ -6,10 +6,9 @@ namespace Game {
     internal sealed class PlayerMovement : MonoBehaviour {
        
         [SerializeField] private FloatResourceRx _reactiveSpeed;
-        [SerializeField] private FloatResourceRx _reactiveHealth;
 
-        [SerializeField] private PlayerSpeed _startSpeed;
-        [SerializeField] private Rigidbody2D _rigidBody;
+        [SerializeField] private PlayerSpeed _playerSpeed;
+        [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private LayerMask _groundayerMask;
         [SerializeField] private Transform _leftRaycast;
         [SerializeField] private Transform _rightRaycast;
@@ -20,7 +19,7 @@ namespace Game {
         private const float RAYCAST_DISTANCE = 2.0f;
 
         private void Awake() {
-            _reactiveSpeed.Value = _startSpeed.Neutral;
+            _reactiveSpeed.Value = _playerSpeed.Neutral;
         }
 
         private void LateUpdate() {
@@ -46,7 +45,7 @@ namespace Game {
 
                 transform.position = new Vector2(transform.position.x, avaragePoint.y + transform.up.y * 0.75f); // Genera el movimiento erratico en Y
                 // Fin.
-                _rigidBody.velocity = new Vector2(_reactiveSpeed.Value, _rigidBody.velocity.y) * transform.right;          
+                _rigidbody.velocity = new Vector2(_reactiveSpeed.Value, _rigidbody.velocity.y) * transform.right;          
             }
         }
        

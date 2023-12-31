@@ -24,7 +24,6 @@ namespace Game {
 
         private void DecrementLife() {
             _playerHealth.Value -= Mathf.Abs(ReactiveResource.Value) * Time.deltaTime;
-            print(ReactiveResource.Value);
         }
 
     }

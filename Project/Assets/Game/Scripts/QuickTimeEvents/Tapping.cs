@@ -37,7 +37,6 @@ namespace Game {
             }
 
             print("Stop!");
-            PlayerInput.Reset();
             Time.timeScale = DEFAULT_TIMESCALE;
             if (tapCounter >= _countGoal) StartCoroutine(CO_Win());
             if (tapCounter < _countGoal) StartCoroutine(CO_Lose());
@@ -53,6 +52,8 @@ namespace Game {
                 yield return null;
             }
 
+            PlayerInput.Reset();
+            _OnTimeEvent = false;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
@@ -66,6 +67,8 @@ namespace Game {
                 yield return null;
             }
 
+            PlayerInput.Reset();
+            _OnTimeEvent = false;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 

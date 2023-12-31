@@ -56,7 +56,6 @@ namespace Game {
                 yield return null;
             }
 
-            PlayerInput.Reset();
             Time.timeScale = DEFAULT_TIMESCALE;  
             StartCoroutine(CO_Lose()); 
         }
@@ -71,6 +70,8 @@ namespace Game {
                 yield return null;
             }
 
+            PlayerInput.Reset();
+            _OnTimeEvent = false;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
@@ -84,6 +85,8 @@ namespace Game {
                 yield return null;
             }
 
+            PlayerInput.Reset();
+            _OnTimeEvent = false;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }        
 

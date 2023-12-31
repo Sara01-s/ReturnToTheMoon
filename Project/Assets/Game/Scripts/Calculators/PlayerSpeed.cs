@@ -10,5 +10,9 @@ namespace Game {
         [SerializeField] internal float Fast;
         [SerializeField] internal float VeryFast;
 
+        private void Awake() {
+            ReactiveResource.Value = Neutral;
+        }
+
     }
 }
