@@ -10,7 +10,7 @@ namespace Game {
             _playerRigidbody.simulated = false;
         }
 
-        public void GravityToggle() {
+        public void EnableSimulation() {
             _playerRigidbody.simulated = true;
         }
 
