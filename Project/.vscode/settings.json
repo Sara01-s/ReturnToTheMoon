@@ -58,5 +58,5 @@
         "**/*.uxml": false,
         "**/*.uss": false
     },
-    "dotnet.defaultSolution": "ReturnToTheMoon.sln"
+    "dotnet.defaultSolution": "Project.sln"
 }

@@ -1,43 +1,34 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 namespace Game {
 
-    internal sealed class TapQTE : MonoBehaviour {
+    internal sealed class QTE_Tapping : QuickTimeEvent {
 
+        [Header("Quick Time Event Settings")]
         [SerializeField] private FloatResourceRx _reactiveSpeed;
         [SerializeField] private PlayerSpeed _playerSpeed;
         
-        [SerializeField] private float _timeSlow;
-
-        [SerializeField]  private float QTE_SPEED_INPUTCOUNT;
-        [SerializeField]  private float QTE_SLOWDOWN_DURATION;
-        [SerializeField]  private float HAZARD_QTE_SLOWDOWN_DURATION;
-        [SerializeField]  private float HAZARD_QTE_BOOST_DURATION;
-
-        private const float DEFAULT_TIME_SCALE = 1.0f;
+        [SerializeField]  private int _countGoal;
+        [SerializeField]  private float _coolDownDuration;
+        [SerializeField]  private float _boostDuration;
 
         private float _hazardBoostTimer;
         private float _hazardSlowDownTimer;
-        private float _slowDownTimer;
 
         private bool _tapped;
-        
-        private void Awake() {
-            _hazardSlowDownTimer = HAZARD_QTE_SLOWDOWN_DURATION;
-            _hazardBoostTimer = HAZARD_QTE_BOOST_DURATION;
-            _slowDownTimer = QTE_SLOWDOWN_DURATION;
 
-            if (_timeSlow > 0.0f) {
-                _slowDownTimer *= _timeSlow; // Normalizar el tiempo debido al cambio en el timeScale.
-            }
+        private void Awake() {
+            _hazardSlowDownTimer = _coolDownDuration;
+            _hazardBoostTimer = _boostDuration;
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.CompareTag("Player")) {
                 PlayerInput.OnInput = Tapped;
 
-                StartCoroutine(CO_INITQTE());
+                StartCoroutine(CO_InitQTE());
             }
         }
 
@@ -47,34 +38,34 @@ namespace Game {
             // Otras cosas(?
         }
 
-        private IEnumerator CO_INITQTE() {
-            Time.timeScale = _timeSlow;
+        protected override IEnumerator CO_InitQTE() {
+            Time.timeScale = _SlowMotionFactor;            
+            print("Esperando el tiempo de preparacion...");
+            yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("TapTapTap!");
             
+            var startTime = Time.unscaledTimeAsDouble;
             var tapCounter = 0;
 
-            while (_slowDownTimer > 0.0f) {
-                _slowDownTimer -= Time.deltaTime;
+            while ((Time.unscaledTimeAsDouble - startTime) <= _SlowDownDuration) {
                 
                 if (_tapped) {
                     tapCounter++;
-                    print("TapCounter: " + tapCounter);
                     _tapped = false;
+                    print("TapCounter: " + tapCounter);
                 }
                 
                 yield return null;
             }
 
-            Time.timeScale = DEFAULT_TIME_SCALE;
+            Time.timeScale = DEFAULT_TIMESCALE;
             print("Stop!");
-
             PlayerInput.Reset();
-            _slowDownTimer = QTE_SLOWDOWN_DURATION;
-            if (tapCounter >= QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_BOOST());
-            if (tapCounter < QTE_SPEED_INPUTCOUNT) StartCoroutine(CO_DECREASE());
+            if (tapCounter >= _countGoal) StartCoroutine(CO_Win());
+            if (tapCounter < _countGoal) StartCoroutine(CO_Lose());
         }
 
-        private IEnumerator CO_BOOST() {
+        protected override IEnumerator CO_Win() {
             _reactiveSpeed.Value = _playerSpeed.Fast;
             print("Logrado");
 
@@ -83,11 +74,11 @@ namespace Game {
                 yield return null;
             }
 
-            _hazardBoostTimer = HAZARD_QTE_BOOST_DURATION;
+            _hazardBoostTimer = _boostDuration;
             _reactiveSpeed.Value = _playerSpeed.Neutral;
         }
 
-        private IEnumerator CO_DECREASE() {
+        protected override IEnumerator CO_Lose() {
             _reactiveSpeed.Value = _playerSpeed.VerySlow;
             print("No logrado");
 
@@ -96,7 +87,7 @@ namespace Game {
                 yield return null;
             }
 
-            _hazardSlowDownTimer = HAZARD_QTE_SLOWDOWN_DURATION;
+            _hazardSlowDownTimer = _coolDownDuration;
             _reactiveSpeed.Value = _playerSpeed.Neutral;
         }
 
