@@ -15,14 +15,7 @@ namespace Game {
         private TouchPhase _stationary = TouchPhase.Stationary; 
         private TouchPhase _moved = TouchPhase.Moved; 
 
-        private void OnTriggerEnter2D(Collider2D collider) {
-            if (collider.CompareTag("Player")) {
-                PlayerInput.OnInput = Pressed;
-                StartCoroutine(CO_InitQTE());
-            }
-        }
-
-        private void Pressed() {
+        protected override void Input() {
             // Otros eventos(?
         }
 
@@ -39,6 +32,7 @@ namespace Game {
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
 
                 if (currentTouchPhase != _stationary && currentTouchPhase != _moved) {
+                    PlayerInput.Reset();
                     StartCoroutine(CO_Lose());
                     yield break;
                 }

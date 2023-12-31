@@ -13,19 +13,8 @@ namespace Game {
         [SerializeField] private float _boostDuration;
         [SerializeField] private float _bigBoostDuration;
         
-        private bool _tapped;
-
-        private void OnTriggerEnter2D(Collider2D collider) {
-            if (collider.CompareTag("Player")) {
-                PlayerInput.OnInput = Tapped;
-                StartCoroutine(CO_InitQTE());
-            }
-        }
-
-        private void Tapped() {
+        protected override void Input() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
-            _tapped = true;
-            // Otras cosas(?            
         }
 
         protected override IEnumerator CO_InitQTE() {
@@ -41,6 +30,7 @@ namespace Game {
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
                 print("Aprieta!");
                 if (currentTouchPhase == TouchPhase.Began) { // Se puede spamear touches y en teoria saldra win casi siempre
+                    PlayerInput.Reset();
                     StartCoroutine(CO_Win());
                     yield break;
                 }

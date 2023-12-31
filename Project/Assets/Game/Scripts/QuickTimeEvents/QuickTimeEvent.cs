@@ -13,10 +13,17 @@ namespace Game {
         
         protected const float DEFAULT_TIMESCALE = 1.0f;
 
-        internal void Initialize() => StartCoroutine(CO_InitQTE());
         protected abstract IEnumerator CO_InitQTE();
         protected abstract IEnumerator CO_Win();
         protected abstract IEnumerator CO_Lose();
+        protected abstract void Input();
+
+        protected virtual void OnTriggerEnter2D(Collider2D collider) {
+            if (collider.CompareTag("Player")) {
+                PlayerInput.OnInput = Input;
+                StartCoroutine(CO_InitQTE());
+            }
+        }
 
     }
 }
