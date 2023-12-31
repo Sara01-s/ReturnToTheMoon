@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using System;
-using Mono.Cecil;
-using UnityEngine.PlayerLoop;
 
 namespace Game {
 
