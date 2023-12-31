@@ -4,10 +4,9 @@ using System;
 
 namespace Game {
 
-    internal sealed class QTE_Presicion : QuickTimeEvent {
+    internal sealed class Presicion : TimeEvent {
 
-        [Header("QTE_Presicion Settings")]
-        [SerializeField] private FloatResourceRx _reactiveSpeed;
+        [Header("Presicion Settings")]
         [SerializeField] private PlayerSpeed _playerSpeed;
 
         [SerializeField, Range(0.1f, 5.0f)] private float _oscillatonSpeed;
@@ -27,7 +26,6 @@ namespace Game {
             Time.timeScale = _SlowMotionFactor;            
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
-
             print("Acierta correctamente!");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -64,7 +62,7 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _reactiveSpeed.Value = _playerSpeed.Fast;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
             print("Lo lograste!");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -73,11 +71,11 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _reactiveSpeed.Value = _playerSpeed.VerySlow;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.VerySlow;
             print("Fallaste");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -86,7 +84,7 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }        
 
     }

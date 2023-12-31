@@ -3,14 +3,29 @@ using UniRx;
 
 namespace Game {
 
-    internal sealed class PlayerLDR : MonoBehaviour {
+    internal sealed class PlayerLDR : PlayerResource {
         
-        // Should be const and not serialized?
-        [SerializeField] internal float MIN_LDR = -0.5f;
-        [SerializeField] internal float BETWEEN_MIN_DEFAULT_LDR = -0.7f;
-        [SerializeField] internal float DEFAULT_LDR = -1.0f;
-        [SerializeField] internal float BETWEEN_MAX_DEFAULT_LDR = -1.5f;
-        [SerializeField] internal float MAX_LDR = -1.7f;
+        
+        [SerializeField] internal float MinLDR;
+        [SerializeField] internal float MinDefLDR;
+        [SerializeField] internal float DefaultLDR;
+        [SerializeField] internal float MaxDefLDR;
+        [SerializeField] internal float MaxLDR;
+
+        [SerializeField] private FloatResourceRx _playerHealth;
+
+        private void Awake() {
+            ReactiveResource.Value = DefaultLDR;
+        }
+
+        private void Update() {
+            DecrementLife();
+        }
+
+        private void DecrementLife() {
+            _playerHealth.Value -= Mathf.Abs(ReactiveResource.Value) * Time.deltaTime;
+            print(ReactiveResource.Value);
+        }
 
     }
 }

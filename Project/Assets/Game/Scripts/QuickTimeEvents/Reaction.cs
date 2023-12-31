@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game {
 
-    internal sealed class QTE_Reaction : QuickTimeEvent {
+    internal sealed class Reaction : TimeEvent {
         
-        [Header("QTE_Reaction Settings")]
-        [SerializeField] private FloatResourceRx _reactiveSpeed;
+        [Header("Reaction Settings")]
         [SerializeField] private PlayerSpeed _playerSpeed;
 
         [SerializeField] private float _boostDuration;
@@ -21,7 +19,6 @@ namespace Game {
             Time.timeScale = _SlowMotionFactor;            
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
-            print("Acierta a tiempo!");
             Time.timeScale = DEFAULT_TIMESCALE; 
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -43,7 +40,7 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _reactiveSpeed.Value = _playerSpeed.VeryFast;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.VeryFast;
             print("Acertaste!");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -52,11 +49,11 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _reactiveSpeed.Value = _playerSpeed.Fast;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
             print("Fallaste!");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -65,7 +62,7 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
     }
 }

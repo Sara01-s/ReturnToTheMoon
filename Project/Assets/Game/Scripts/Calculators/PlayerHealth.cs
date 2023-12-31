@@ -3,23 +3,23 @@ using UniRx;
 
 namespace Game {
     
-    internal sealed class PlayerHealth : MonoBehaviour { 
+    internal sealed class PlayerHealth : PlayerResource { 
        
-        [SerializeField] private FloatResourceRx _playerHealth;
-        [SerializeField] internal float MAX_HEALTH = 100.0f;
+        [SerializeField] internal float MaxHealth;
 
         private void Awake() {
-            _playerHealth.Value = MAX_HEALTH;
+            ReactiveResource.Value = MaxHealth;         
         }
 
         private void OnEnable() {
-            _playerHealth.Observable.Subscribe(Die);
+            ReactiveResource.Observable.Subscribe(Die);
         }
         private void OnDisable() {
-            _playerHealth.Observable.Dispose();
+            ReactiveResource.Observable.Dispose();
         }
 
         private void Die(float health) {
+            if (ReactiveResource.Value > 0.1f) return;
             // TODO: Death Logic, reset level...
         }
 

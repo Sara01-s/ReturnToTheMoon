@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using Mono.Cecil;
 
 namespace Game {
 
-    internal abstract class QuickTimeEvent : MonoBehaviour {
-        
+    internal abstract class TimeEvent : MonoBehaviour {
+
         [Header("General Event Settings")]
         [SerializeField, Range(0.1f, 2.0f)] protected float _PreparationTimeInSeconds;
         [SerializeField, Range(0.1f, 1.0f)] protected float _SlowMotionFactor;

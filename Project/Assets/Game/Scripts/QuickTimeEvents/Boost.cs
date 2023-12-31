@@ -1,31 +1,21 @@
 using System.Collections;
+using NSubstitute;
 using UnityEngine;
 
 namespace Game {
 
     internal sealed class Boost : MonoBehaviour {
 
-        [SerializeField] private FloatResourceRx _reactiveStamina;
-        [SerializeField] private FloatResourceRx _reactiveSpeed;
-        [SerializeField] private FloatResourceRx _reactiveLDR;
-
+        [SerializeField] private PlayerStamina _playerStamina;
         [SerializeField] private PlayerSpeed _playerSpeed;
         [SerializeField] private PlayerLDR _playerLDR;
 
-        [SerializeField] private float DEFAULT_BOOST_MAX_COOLDOWN;
-        [SerializeField] private float DEFAULT_BOOST_DURATION;
-        [SerializeField] private float DEFAULT_BOOST_COST;
-
-        private float _boostDurationTimer;
-        private float _coolDownTimer;
+        [SerializeField] private float _defaultBoostDuration;
+        [SerializeField] private float _defaultMaxCoolDown;
+        [SerializeField] private float _defaultBostCost;
 
         private bool _boosted;
 
-        private void Awake() {
-            _boostDurationTimer = DEFAULT_BOOST_DURATION;
-            _coolDownTimer = DEFAULT_BOOST_MAX_COOLDOWN;
-        }
-    
         private void OnEnable() {
             PlayerInput.SetDefaultInput(Boosted);
         }
@@ -36,36 +26,36 @@ namespace Game {
         private void Boosted() {
             if (_boosted || PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
             _boosted = true;
-            StartCoroutine(CO_BOOSTED());
+            StartCoroutine(CO_Boosted());
         }
 
-        private IEnumerator CO_BOOSTED() {
-            _reactiveSpeed.Value = _playerSpeed.Fast;
-            _reactiveStamina.Value -= DEFAULT_BOOST_COST;
-            _reactiveLDR.Value = _playerLDR.BETWEEN_MIN_DEFAULT_LDR;
+        private IEnumerator CO_Boosted() {
+            _playerStamina.ReactiveResource.Value -= _defaultBostCost;
+            _playerLDR.ReactiveResource.Value = _playerLDR.MinDefLDR;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
 
             Debug.Log("Boost started");
 
-            while (_boostDurationTimer > 0.0f) {
-                _boostDurationTimer -= Time.deltaTime;
+            var startTime = Time.unscaledTimeAsDouble;
+
+            while ((Time.unscaledTimeAsDouble - startTime) <= _defaultBoostDuration) {
                 yield return null;
             }
 
             Debug.Log("Boost ended");
             
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
-            _reactiveLDR.Value = _playerLDR.DEFAULT_LDR;
-            _boostDurationTimer = DEFAULT_BOOST_DURATION;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            _playerLDR.ReactiveResource.Value = _playerLDR.DefaultLDR;
 
             StartCoroutine(CO_COOLDOWN());
         }
 
         private IEnumerator CO_COOLDOWN() {
-            while (_coolDownTimer > 0.0f) {
-                _coolDownTimer -= Time.deltaTime;
+            var startTime = Time.unscaledTimeAsDouble;
+
+            while ((Time.unscaledTimeAsDouble - startTime) <= _defaultMaxCoolDown) {
                 yield return null;
             }
-            _coolDownTimer = DEFAULT_BOOST_MAX_COOLDOWN;
             _boosted = false;
         }
 

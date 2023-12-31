@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 328599477}
   m_Layer: 0
-  m_Name: QTE'S
+  m_Name: TimeEvents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -743,9 +743,9 @@ GameObject:
   m_Component:
   - component: {fileID: 512921856}
   - component: {fileID: 512921857}
-  - component: {fileID: 512921858}
+  - component: {fileID: 512921859}
   m_Layer: 0
-  m_Name: QTE_Tapping
+  m_Name: Tapping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -811,7 +811,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &512921858
+--- !u!114 &512921859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -820,17 +820,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 512921854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a02f51b0a803a14a958376a595f93f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5590b5bb41242bd47956c3b63552937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _PreparationTimeInSeconds: 2
   _SlowMotionFactor: 0.2
-  _eventDuration: 4
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
+  _eventDuration: 3
   _playerSpeed: {fileID: 1439702541}
-  _countGoal: 12
+  _countGoal: 14
   _boostDuration: 2
-  _delayDuration: 0
+  _delayDuration: 2
 --- !u!1 &552508600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,14 +1122,14 @@ GameObject:
   m_Component:
   - component: {fileID: 672870365}
   - component: {fileID: 672870367}
-  - component: {fileID: 672870368}
+  - component: {fileID: 672870369}
   m_Layer: 0
-  m_Name: StealthEvent
+  m_Name: Stealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &672870365
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,7 +1190,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &672870368
+--- !u!114 &672870369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1200,13 +1199,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 672870364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc382933ba49f224893fc768b258b09e, type: 3}
+  m_Script: {fileID: 11500000, guid: 714501795b8074449a5b0c4ea542325d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _PreparationTimeInSeconds: 2
   _SlowMotionFactor: 0.2
   _eventDuration: 3
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
   _playerSpeed: {fileID: 1439702541}
   _delayDuration: 1.5
   _bigDelayDuration: 3
@@ -2311,9 +2309,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1110542275}
   - component: {fileID: 1110542276}
-  - component: {fileID: 1110542277}
+  - component: {fileID: 1110542278}
   m_Layer: 0
-  m_Name: QTE_Presicion
+  m_Name: Presicion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2379,7 +2377,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &1110542277
+--- !u!114 &1110542278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2388,19 +2386,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1110542274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fae2f12e7e3fd774c865fd2a05a90d8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 881a5c0e01a0bc34ca37b4371470d7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _PreparationTimeInSeconds: 2
   _SlowMotionFactor: 0.2
-  _eventDuration: 3
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
+  _eventDuration: 5
   _playerSpeed: {fileID: 1439702541}
   _oscillatonSpeed: 1
   _minTargetRange: 0.5
   _maxTargetRange: 1
-  _minRange: 0
-  _maxRange: 1
+  _minRange: 1
+  _maxRange: 0
   _boostDuration: 2
   _delayDuration: 2
 --- !u!1 &1439702534
@@ -2467,7 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8372256b2dfc44a97860e86dc517ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reactiveStamina: {fileID: 11400000, guid: 50946788c2ec29448b35f2a2a844e47b, type: 2}
+  ReactiveResource: {fileID: 11400000, guid: 50946788c2ec29448b35f2a2a844e47b, type: 2}
   _initialValue: 100
 --- !u!114 &1439702539
 MonoBehaviour:
@@ -2481,14 +2478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ee8376da4e46248a98b86df09be2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reactiveStamina: {fileID: 11400000, guid: 50946788c2ec29448b35f2a2a844e47b, type: 2}
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
-  _reactiveLDR: {fileID: 11400000, guid: a04dcbfb3e81e8549ba44287f72779f9, type: 2}
+  _playerStamina: {fileID: 1439702538}
   _playerSpeed: {fileID: 1439702541}
   _playerLDR: {fileID: 1439702540}
-  DEFAULT_BOOST_MAX_COOLDOWN: 2
-  DEFAULT_BOOST_DURATION: 0.5
-  DEFAULT_BOOST_COST: 10
+  _defaultBoostDuration: 1
+  _defaultMaxCoolDown: 2
+  _defaultBostCost: 5
 --- !u!114 &1439702540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,11 +2496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcae72b1b33da304e92e8f6636784deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MIN_LDR: -0.5
-  BETWEEN_MIN_DEFAULT_LDR: -0.7
-  DEFAULT_LDR: -1
-  BETWEEN_MAX_DEFAULT_LDR: -1.5
-  MAX_LDR: -1.7
+  ReactiveResource: {fileID: 11400000, guid: a04dcbfb3e81e8549ba44287f72779f9, type: 2}
+  MinLDR: -0.5
+  MinDefLDR: -0.7
+  DefaultLDR: -1
+  MaxDefLDR: -1.5
+  MaxLDR: -1.7
 --- !u!114 &1439702541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,11 +2514,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da077dafdbb1ab4a8a0a9687106f5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VerySlow: 1
-  Slow: 1.25
-  Neutral: 1.5
-  Fast: 1.75
-  VeryFast: 2
+  ReactiveResource: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
+  VerySlow: 5
+  Slow: 10
+  Neutral: 20
+  Fast: 30
+  VeryFast: 35
 --- !u!61 &1439702542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2659,8 +2656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f0b11736992db4690d5810632959db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 11400000, guid: a00dc10131e7d1344998fe6b33143805, type: 2}
-  MAX_HEALTH: 100
+  ReactiveResource: {fileID: 11400000, guid: a00dc10131e7d1344998fe6b33143805, type: 2}
+  MaxHealth: 100
 --- !u!1 &1598718317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,9 +2948,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1806297375}
   - component: {fileID: 1806297376}
-  - component: {fileID: 1806297377}
+  - component: {fileID: 1806297378}
   m_Layer: 0
-  m_Name: QTE_Reaction
+  m_Name: Reaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3019,7 +3016,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &1806297377
+--- !u!114 &1806297378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3028,13 +3025,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1806297374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 570b9d6db4564834190466cc099ce99f, type: 3}
+  m_Script: {fileID: 11500000, guid: f7d2e66fc334bcf4081a46fee4204dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _PreparationTimeInSeconds: 2
   _SlowMotionFactor: 0.2
   _eventDuration: 1
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
   _playerSpeed: {fileID: 1439702541}
   _boostDuration: 1.5
   _bigBoostDuration: 3
@@ -3115,14 +3111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ee8376da4e46248a98b86df09be2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reactiveStamina: {fileID: 11400000, guid: 50946788c2ec29448b35f2a2a844e47b, type: 2}
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
-  _reactiveLDR: {fileID: 11400000, guid: a04dcbfb3e81e8549ba44287f72779f9, type: 2}
+  _playerStamina: {fileID: 0}
   _playerSpeed: {fileID: 1873720114}
   _playerLDR: {fileID: 1873720113}
-  DEFAULT_BOOST_MAX_COOLDOWN: 1.5
-  DEFAULT_BOOST_DURATION: 2
-  DEFAULT_BOOST_COST: 5
+  _defaultBoostDuration: 0
+  _defaultMaxCoolDown: 0
+  _defaultBostCost: 0
 --- !u!114 &1873720113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3135,11 +3129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcae72b1b33da304e92e8f6636784deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MIN_LDR: -0.5
-  BETWEEN_MIN_DEFAULT_LDR: -0.7
-  DEFAULT_LDR: -1
-  BETWEEN_MAX_DEFAULT_LDR: -1.5
-  MAX_LDR: -1.7
+  ReactiveResource: {fileID: 0}
+  MinLDR: 0
+  MinDefLDR: 0
+  DefaultLDR: 0
+  MaxDefLDR: 0
+  MaxLDR: 0
 --- !u!114 &1873720114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,6 +3147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da077dafdbb1ab4a8a0a9687106f5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReactiveResource: {fileID: 0}
   VerySlow: 2.5
   Slow: 5
   Neutral: 10
@@ -3169,7 +3165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8372256b2dfc44a97860e86dc517ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reactiveStamina: {fileID: 11400000, guid: 50946788c2ec29448b35f2a2a844e47b, type: 2}
+  ReactiveResource: {fileID: 0}
   _initialValue: 100
 --- !u!114 &1873720116
 MonoBehaviour:
@@ -3183,8 +3179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f0b11736992db4690d5810632959db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 11400000, guid: a00dc10131e7d1344998fe6b33143805, type: 2}
-  MAX_HEALTH: 100
+  ReactiveResource: {fileID: 0}
+  MaxHealth: 0
 --- !u!114 &1873720117
 MonoBehaviour:
   m_ObjectHideFlags: 0

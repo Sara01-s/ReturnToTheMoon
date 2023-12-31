@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Game {
 
-    internal sealed class StealthEvent : QuickTimeEvent {
+    internal sealed class Stealth : TimeEvent {
         
-        [Header("StealthEvent Settings")]
-        [SerializeField] private FloatResourceRx _reactiveSpeed;
+        [Header("Stealth Settings")]
         [SerializeField] private PlayerSpeed _playerSpeed;
 
         [SerializeField] private float _delayDuration;
@@ -23,7 +22,6 @@ namespace Game {
             Time.timeScale = _SlowMotionFactor;
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
-            print("Terminado el tiempo de preparacion...");
             Time.timeScale = DEFAULT_TIMESCALE;
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -46,7 +44,7 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _reactiveSpeed.Value = _playerSpeed.Slow;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Slow;
             print("Well Done!");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -55,11 +53,11 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _reactiveSpeed.Value = _playerSpeed.VerySlow;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.VerySlow;
             print("Bad!");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -68,7 +66,7 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
     }

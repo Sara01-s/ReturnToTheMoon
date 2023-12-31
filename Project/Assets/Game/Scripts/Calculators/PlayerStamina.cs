@@ -12,11 +12,10 @@ namespace Game {
         Fatigued = 3
     }
 
-    internal sealed class PlayerStamina : MonoBehaviour {
+    internal sealed class PlayerStamina : PlayerResource {
 
         internal StaminaState CurrentStaminaState;
 
-        [SerializeField] private FloatResourceRx _reactiveStamina;
         [SerializeField] private float _initialValue;
 
         private const float MAX_THRESHOLD = 100.0f;
@@ -26,14 +25,14 @@ namespace Game {
         private const float FATIGUED_THRESHOLD = 0.0f;
 
         private void Awake() {
-            _reactiveStamina.Value = _initialValue;
+            ReactiveResource.Value = _initialValue;
         }
 
         private void OnEnable() {
-            _reactiveStamina.Observable.Subscribe(UpdateStaminaState);
+            ReactiveResource.Observable.Subscribe(UpdateStaminaState);
         }
         private void OnDisable() {
-            _reactiveStamina.Observable.Dispose();
+            ReactiveResource.Observable.Dispose();
         }
 
         private void UpdateStaminaState(float stamina) {

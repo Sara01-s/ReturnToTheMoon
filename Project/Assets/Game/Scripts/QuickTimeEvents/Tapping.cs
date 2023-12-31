@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Game {
 
-    internal sealed class QTE_Tapping : QuickTimeEvent {
+    internal sealed class Tapping : TimeEvent {
 
-        [Header("QTE_Tapping Settings")]
-        [SerializeField] private FloatResourceRx _reactiveSpeed;
+        [Header("Tapping Settings")]
         [SerializeField] private PlayerSpeed _playerSpeed;
         
         [SerializeField]  private int _countGoal;
@@ -45,7 +44,7 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _reactiveSpeed.Value = _playerSpeed.Fast;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
             print("Logrado");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -54,11 +53,11 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _reactiveSpeed.Value = _playerSpeed.VerySlow;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.VerySlow;
             print("No logrado");
 
             var startTime = Time.unscaledTimeAsDouble;
@@ -67,7 +66,7 @@ namespace Game {
                 yield return null;
             }
 
-            _reactiveSpeed.Value = _playerSpeed.Neutral;
+            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
         }
 
     }
