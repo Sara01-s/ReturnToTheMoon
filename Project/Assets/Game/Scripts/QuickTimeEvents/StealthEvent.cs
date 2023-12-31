@@ -1,40 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game {
 
-    internal sealed class StealthEvent : MonoBehaviour {
+    internal sealed class StealthEvent : QuickTimeEvent {
         
+        [Header("StealthEvent Settings")]
         [SerializeField] private FloatResourceRx _reactiveSpeed;
         [SerializeField] private PlayerSpeed _playerSpeed;
-        [SerializeField] private float _preparationTimeInSeconds;
-        [SerializeField] private float _timeSlow;
 
-        private const float STEALTH_EVENT_DURATION = 5.0f;
-        private const float DELAY_DURATION = 1.5f;
-        private const float BIG_DELAY_DURATION = 3.0f;
-        private const float DEFAULT_TIME_SCALE = 1.0f;
+        [SerializeField] private float _delayDuration;
+        [SerializeField] private float _bigDelayDuration;
 
-        private float _stealthEventTimer;
-        private float _delayTimer;
-        private float _bigDelayTimer;
-
-        private void Awake() {
-            _stealthEventTimer = STEALTH_EVENT_DURATION;
-            _delayTimer = DELAY_DURATION;
-            _bigDelayTimer = BIG_DELAY_DURATION;
-
-            if (_timeSlow > 0.0f) {
-                _preparationTimeInSeconds *= _timeSlow; // Normalizar el tiempo debido al cambio en el timeScale.
-            }
-        }
+        private TouchPhase _stationary = TouchPhase.Stationary; 
+        private TouchPhase _moved = TouchPhase.Moved; 
 
         private void OnTriggerEnter2D(Collider2D collider) {
             if (collider.CompareTag("Player")) {
                 PlayerInput.OnInput = Pressed;
-
-                StartCoroutine(CO_INITQTE());
+                StartCoroutine(CO_InitQTE());
             }
         }
 
@@ -42,52 +26,54 @@ namespace Game {
             // Otros eventos(?
         }
 
-        private IEnumerator CO_INITQTE() {
-            Time.timeScale = _timeSlow;
+        protected override IEnumerator CO_InitQTE() {
+            Time.timeScale = _SlowMotionFactor;
             print("Esperando el tiempo de preparacion...");
-            yield return new WaitForSeconds(_preparationTimeInSeconds);
+            yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("Terminado el tiempo de preparacion...");
-            Time.timeScale = DEFAULT_TIME_SCALE;
+            Time.timeScale = DEFAULT_TIMESCALE;
 
-            while (_stealthEventTimer > 0.0f) {
-                _stealthEventTimer -= Time.deltaTime;
+            var startTime = Time.unscaledTimeAsDouble;
 
-                if (PlayerInput.CurrentTouchPhase != TouchPhase.Stationary && PlayerInput.CurrentTouchPhase != TouchPhase.Moved) {
-                    StartCoroutine(CO_DECREASE());
+            while ((Time.unscaledTimeAsDouble - startTime) <= _eventDuration) {
+                var currentTouchPhase = PlayerInput.CurrentTouchPhase;
+
+                if (currentTouchPhase != _stationary && currentTouchPhase != _moved) {
+                    StartCoroutine(CO_Lose());
                     yield break;
                 }
 
                 print("Hold!");
-
                 yield return null;
             }
 
             PlayerInput.Reset();
-            _stealthEventTimer = STEALTH_EVENT_DURATION;
-            StartCoroutine(CO_BOOST());
+            StartCoroutine(CO_Win());
         }
 
-        private IEnumerator CO_BOOST() {
+        protected override IEnumerator CO_Win() {
             _reactiveSpeed.Value = _playerSpeed.Slow;
             print("Well Done!");
-            while (_delayTimer > 0.0f) {
-                _delayTimer -= Time.deltaTime;
+
+            var startTime = Time.unscaledTimeAsDouble;
+
+            while ((Time.unscaledTimeAsDouble - startTime) <= _delayDuration) {
                 yield return null;
             }
 
-            _delayTimer = DELAY_DURATION;
             _reactiveSpeed.Value = _playerSpeed.Neutral;
         }
 
-        private IEnumerator CO_DECREASE() {
+        protected override IEnumerator CO_Lose() {
             _reactiveSpeed.Value = _playerSpeed.VerySlow;
             print("Bad!");
-            while (_bigDelayTimer > 0.0f) {
-                _bigDelayTimer -= Time.deltaTime;
+
+            var startTime = Time.unscaledTimeAsDouble;
+
+            while ((Time.unscaledTimeAsDouble - startTime) <= _delayDuration) {
                 yield return null;
             }
 
-            _bigDelayTimer = BIG_DELAY_DURATION;
             _reactiveSpeed.Value = _playerSpeed.Neutral;
         }
 

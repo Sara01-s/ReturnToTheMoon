@@ -168,13 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7672bc82c57b44ca6792734cfc5f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
-  _playerSpeed: {fileID: 1439702541}
-  _timeSlow: 0.2
-  QTE_SPEED_INPUTCOUNT: 12
-  QTE_SLOWDOWN_DURATION: 3
-  HAZARD_QTE_SLOWDOWN_DURATION: 2
-  HAZARD_QTE_BOOST_DURATION: 2
 --- !u!61 &246373620
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -479,33 +472,14 @@ GameObject:
   m_Component:
   - component: {fileID: 512921856}
   - component: {fileID: 512921857}
-  - component: {fileID: 512921855}
+  - component: {fileID: 512921858}
   m_Layer: 0
-  m_Name: TapQTE
+  m_Name: QTE_Tapping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &512921855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512921854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e7672bc82c57b44ca6792734cfc5f4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
-  _playerSpeed: {fileID: 1439702541}
-  _timeSlow: 0.2
-  QTE_SPEED_INPUTCOUNT: 12
-  QTE_SLOWDOWN_DURATION: 3
-  HAZARD_QTE_SLOWDOWN_DURATION: 2
-  HAZARD_QTE_BOOST_DURATION: 2
 --- !u!4 &512921856
 Transform:
   m_ObjectHideFlags: 0
@@ -566,6 +540,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &512921858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512921854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a02f51b0a803a14a958376a595f93f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PreparationTimeInSeconds: 2
+  _SlowMotionFactor: 0.2
+  _eventDuration: 0
+  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
+  _playerSpeed: {fileID: 1439702541}
+  _countGoal: 12
+  _boostDuration: 2
+  _delayDuration: 0
 --- !u!1 &578189823
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &672870365
 Transform:
   m_ObjectHideFlags: 0
@@ -805,10 +799,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc382933ba49f224893fc768b258b09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PreparationTimeInSeconds: 2
+  _SlowMotionFactor: 0.2
+  _eventDuration: 0
   _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
   _playerSpeed: {fileID: 1439702541}
-  _preparationTimeInSeconds: 0.000001
-  _timeSlow: 0.2
+  _delayDuration: 1.5
+  _bigDelayDuration: 3
 --- !u!1 &687731991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,7 +2230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1806297375
 Transform:
   m_ObjectHideFlags: 0
@@ -2303,9 +2300,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1806297374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b50987e6713e6d4490ac1ce64e7ef6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 570b9d6db4564834190466cc099ce99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PreparationTimeInSeconds: 2
+  _SlowMotionFactor: 0.2
+  _eventDuration: 1
+  _reactiveSpeed: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
+  _playerSpeed: {fileID: 1439702541}
+  _boostDuration: 1.5
+  _bigBoostDuration: 3
 --- !u!1 &1873720109
 GameObject:
   m_ObjectHideFlags: 0
