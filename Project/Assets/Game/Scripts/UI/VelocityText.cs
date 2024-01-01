@@ -13,7 +13,8 @@ namespace Game {
         [SerializeField] private TextMeshProUGUI _speed;
 
         private void Update() {
-            _speed.text = _reactiveSpeed.Value.ToString();
+            var currentVelocity = $"Speed: {_reactiveSpeed.Value.ToString("0")}";
+            _speed.text = currentVelocity;
         }
 
     }

@@ -4,12 +4,10 @@ using UnityEngine;
 namespace Game {
 
     internal sealed class Reaction : TimeEvent {
-        
-        [Header("Reaction Settings")]
-        [SerializeField] private PlayerSpeed _playerSpeed;
 
-        [SerializeField] private float _boostDuration;
-        [SerializeField] private float _bigBoostDuration;
+        [Header("Reaction Settings")]
+        [SerializeField] private float _boostTime;
+        [SerializeField] private float _bigBoostTime;
         
         protected override void Input() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
@@ -23,7 +21,7 @@ namespace Game {
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _eventDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
                 print("Aprieta!");
                 if (currentTouchPhase == TouchPhase.Began) { // Se puede spamear touches y en teoria saldra win casi siempre
@@ -39,33 +37,31 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.VeryFast;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VeryFast;
             print("Acertaste!");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _bigBoostDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _bigBoostTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Fallaste!");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
     }
 }

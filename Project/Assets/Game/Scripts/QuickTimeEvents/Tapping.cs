@@ -6,11 +6,9 @@ namespace Game {
     internal sealed class Tapping : TimeEvent {
 
         [Header("Tapping Settings")]
-        [SerializeField] private PlayerSpeed _playerSpeed;
-        
-        [SerializeField]  private int _countGoal;
-        [SerializeField]  private float _boostDuration;
-        [SerializeField]  private float _delayDuration;
+        [SerializeField] private int _countGoal;
+        [SerializeField] private float _boostTime;
+        [SerializeField] private float _delayTime;
 
         protected override void Input() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
@@ -25,7 +23,7 @@ namespace Game {
             var startTime = Time.unscaledTimeAsDouble;
             var tapCounter = 0;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _eventDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
 
                 if (PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
@@ -36,40 +34,38 @@ namespace Game {
                 yield return null;
             }
 
-            print("Stop!");
+            print("Detente!");
             Time.timeScale = DEFAULT_TIMESCALE;
             if (tapCounter >= _countGoal) StartCoroutine(CO_Win());
             if (tapCounter < _countGoal) StartCoroutine(CO_Lose());
         }
 
         protected override IEnumerator CO_Win() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Logrado");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.VerySlow;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("No logrado");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
 
     }

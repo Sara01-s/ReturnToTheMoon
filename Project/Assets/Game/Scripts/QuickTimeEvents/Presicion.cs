@@ -7,14 +7,11 @@ namespace Game {
     internal sealed class Presicion : TimeEvent {
 
         [Header("Presicion Settings")]
-        [SerializeField] private PlayerSpeed _playerSpeed;
-
+        [SerializeField] private float _boostTime;
+        [SerializeField] private float _delayTime;
         [SerializeField, Range(0.1f, 5.0f)] private float _oscillatonSpeed;
         [SerializeField, Range(0.0f, 1.0f)] private float _minTargetRange, _maxTargetRange;
         [SerializeField, Range(0.0f, 1.0f)] private float _minRange, _maxRange;
-
-        [SerializeField]  private float _boostDuration;
-        [SerializeField]  private float _delayDuration;
 
         private float _oscillationValue;
 
@@ -30,7 +27,7 @@ namespace Game {
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _eventDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
                 var oscillationTime = Time.unscaledTime * _oscillatonSpeed;
                 _oscillationValue = Mathf.PingPong(oscillationTime, 1.0f);
 
@@ -61,33 +58,31 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Lo lograste!");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.VerySlow;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("Fallaste");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }        
 
     }

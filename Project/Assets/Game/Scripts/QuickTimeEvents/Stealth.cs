@@ -4,13 +4,11 @@ using UnityEngine;
 namespace Game {
 
     internal sealed class Stealth : TimeEvent {
-        
+
         [Header("Stealth Settings")]
-        [SerializeField] private PlayerSpeed _playerSpeed;
-
-        [SerializeField] private float _delayDuration;
-        [SerializeField] private float _bigDelayDuration;
-
+        [SerializeField] private float _delayTime;
+        [SerializeField] private float _bigDelayTime;
+        
         private TouchPhase _stationary = TouchPhase.Stationary; 
         private TouchPhase _moved = TouchPhase.Moved; 
 
@@ -26,7 +24,7 @@ namespace Game {
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _eventDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
 
                 if (currentTouchPhase != _stationary && currentTouchPhase != _moved) {
@@ -43,33 +41,31 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Slow;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Slow;
             print("Well Done!");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
 
         protected override IEnumerator CO_Lose() {
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.VerySlow;
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("Bad!");
 
             var startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayDuration) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= _bigDelayTime) {
                 yield return null;
             }
 
-            PlayerInput.Reset();
-            _OnTimeEvent = false;
-            _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
+            EndTimeEvent();
+            _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
         }
 
     }

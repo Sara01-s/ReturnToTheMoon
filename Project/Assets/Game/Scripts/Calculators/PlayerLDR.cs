@@ -5,7 +5,6 @@ namespace Game {
 
     internal sealed class PlayerLDR : PlayerResource {
         
-        
         [SerializeField] internal float MinLDR;
         [SerializeField] internal float MinDefLDR;
         [SerializeField] internal float DefaultLDR;
