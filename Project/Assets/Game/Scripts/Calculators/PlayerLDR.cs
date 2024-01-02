@@ -5,13 +5,13 @@ namespace Game {
 
     internal sealed class PlayerLDR : PlayerResource {
         
+        [SerializeField] private FloatResourceRx _playerHealth;
         [SerializeField] internal float MinLDR;
         [SerializeField] internal float MinDefLDR;
         [SerializeField] internal float DefaultLDR;
         [SerializeField] internal float MaxDefLDR;
         [SerializeField] internal float MaxLDR;
 
-        [SerializeField] private FloatResourceRx _playerHealth;
 
         private void Awake() {
             ReactiveResource.Value = DefaultLDR;

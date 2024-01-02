@@ -1,7 +1,5 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
-using TMPro;
-using Newtonsoft.Json;
+using UniRx;
 
 namespace Game {
     
@@ -11,8 +9,6 @@ namespace Game {
         [SerializeField] private FloatResourceRx _currentDistance;
         [SerializeField] private Transform _start;
         [SerializeField] private Transform _player;
-        [Header("HUD Data")]
-        [SerializeField] private TextMeshProUGUI _distance;
 
         private void Awake() {
             _currentDistance.Value = 0.0f;
@@ -20,19 +16,11 @@ namespace Game {
 
         private void Update() {
             UpdateCurrentDistance();
-            UpdateDistanceText();
         }
 
         private void UpdateCurrentDistance() {
             _currentDistance.Value = _player.position.x - _start.position.x;
         }
-
-        private void UpdateDistanceText() {
-            if (_distance == null) return;
-            var distanceText = $"Distance: {_currentDistance.Value.ToString("0")}";
-            _distance.text = distanceText;
-        }
-
 
     }
 }
