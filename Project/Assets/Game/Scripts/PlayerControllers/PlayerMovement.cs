@@ -13,17 +13,10 @@ namespace Game {
         [SerializeField] private Transform _leftRaycast;
         [SerializeField] private Transform _rightRaycast;
         
-        // TEMPORAL
-        [SerializeField] private Transform _camera;
-
         private const float RAYCAST_DISTANCE = 2.0f;
 
         private void Awake() {
             _reactiveSpeed.Value = _playerSpeed.Neutral;
-        }
-
-        private void LateUpdate() {
-            _camera.position = new Vector3(transform.position.x, transform.position.y, _camera.position.z);
         }
 
         private void FixedUpdate() {
@@ -36,13 +29,13 @@ namespace Game {
 
             if (lefthit.collider != null && righthit.collider != null) {
                 // Inicio: https://www.asteroidbase.com/devlog/7-learning-how-to-walk/
-                Vector3 avarageNormal = (lefthit.normal + righthit.normal) / 2;
-                Vector3 avaragePoint = (lefthit.point + righthit.point) / 2;
+                var avarageNormal = (lefthit.normal + righthit.normal) / 2.0f;
+                var avaragePoint = (lefthit.point + righthit.point) / 2.0f;
 
-                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, avarageNormal);
-                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 45.0f);
+                var targetRotation = Quaternion.FromToRotation(Vector2.up, avarageNormal);
+                var finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 45.0f);
+
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, finalRotation.eulerAngles.z);
-
                 transform.position = new Vector2(transform.position.x, avaragePoint.y + transform.up.y * 0.75f); // Genera el movimiento erratico en Y
                 // Fin.
                 _rigidbody.velocity = new Vector2(_reactiveSpeed.Value, _rigidbody.velocity.y) * transform.right;          
