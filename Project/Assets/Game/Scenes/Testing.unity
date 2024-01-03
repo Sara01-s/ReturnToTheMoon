@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 388319366}
   - component: {fileID: 388319365}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,7 +1297,7 @@ Transform:
   m_GameObject: {fileID: 687731991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.3982997, y: 5.79295, z: -10}
+  m_LocalPosition: {x: 4.686079, y: 5.79295, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1527,7 +1527,6 @@ MonoBehaviour:
     m_Bits: 8
   _leftRaycast: {fileID: 2054062712}
   _rightRaycast: {fileID: 1092421320}
-  _camera: {fileID: 687731994}
 --- !u!114 &746353755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3658,7 +3657,6 @@ MonoBehaviour:
     m_Bits: 8
   _leftRaycast: {fileID: 17709639}
   _rightRaycast: {fileID: 1040700417}
-  _camera: {fileID: 687731994}
 --- !u!1 &1517490840
 GameObject:
   m_ObjectHideFlags: 0
@@ -4482,7 +4480,7 @@ Transform:
   m_GameObject: {fileID: 1927819659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.3982997, y: 5.79295, z: -10}
+  m_LocalPosition: {x: 4.686079, y: 5.79295, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

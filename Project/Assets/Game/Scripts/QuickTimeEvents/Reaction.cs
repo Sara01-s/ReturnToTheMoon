@@ -9,7 +9,7 @@ namespace Game {
         [SerializeField] private float _boostTime;
         [SerializeField] private float _bigBoostTime;
 
-        protected override void Input() {
+        protected override void OnInput() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
         }
 

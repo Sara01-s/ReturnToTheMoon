@@ -15,7 +15,7 @@ namespace Game {
 
         private float _oscillationValue;
 
-        protected override void Input() {
+        protected override void OnInput() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
         }
 
@@ -25,7 +25,7 @@ namespace Game {
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("Acierta correctamente!");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            double startTime = Time.unscaledTimeAsDouble;
 
             while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
                 var oscillationTime = Time.unscaledTime * _oscillatonSpeed;

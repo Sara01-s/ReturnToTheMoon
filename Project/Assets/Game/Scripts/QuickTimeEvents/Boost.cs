@@ -1,5 +1,4 @@
 using System.Collections;
-using NSubstitute;
 using UnityEngine;
 
 namespace Game {
@@ -17,45 +16,50 @@ namespace Game {
         private bool _boosted;
 
         private void OnEnable() {
-            PlayerInput.SetDefaultInput(Boosted);
+            PlayerInput.SetDefaultInputCallback(BoostSpeed);
         }
+
         private void OnDisable() {
             PlayerInput.OnInput = null;
         }
 
-        private void Boosted() {
+        private void BoostSpeed() {
             if (_boosted || PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
-            _boosted = true;
             StartCoroutine(CO_Boosted());
         }
 
         private IEnumerator CO_Boosted() {
+			_boosted = true;
+
             _playerStamina.ReactiveResource.Value -= _defaultBostCost;
             _playerLDR.ReactiveResource.Value = _playerLDR.MinDefLDR;
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Fast;
 
-            Debug.Log("Boost started");
+            Debug.Log("Boost activated, cooldown started...");
 
-            var startTime = Time.unscaledTimeAsDouble;
+			float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _defaultBoostDuration) {
-                yield return null;
-            }
-
-            Debug.Log("Boost ended");
+			while (elapsedTime < _defaultBoostDuration) {
+				elapsedTime += Time.deltaTime;
+				yield return null;
+			}
+			
+            Debug.Log("Boost ended, waiting for cooldown to end.");
             
             _playerSpeed.ReactiveResource.Value = _playerSpeed.Neutral;
             _playerLDR.ReactiveResource.Value = _playerLDR.DefaultLDR;
 
-            StartCoroutine(CO_COOLDOWN());
+			StartCoroutine(CO_StartCooldown(_defaultMaxCoolDown));
         }
 
-        private IEnumerator CO_COOLDOWN() {
-            var startTime = Time.unscaledTimeAsDouble;
+        private IEnumerator CO_StartCooldown(double cooldownDuration) {
+            double startTime = Time.unscaledTimeAsDouble;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _defaultMaxCoolDown) {
+            while ((Time.unscaledTimeAsDouble - startTime) <= cooldownDuration) {
                 yield return null;
             }
+			
+			Debug.Log("Cooldown reseted.");
             _boosted = false;
         }
 

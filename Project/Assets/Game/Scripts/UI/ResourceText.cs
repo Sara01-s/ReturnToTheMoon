@@ -1,13 +1,12 @@
 using UnityEngine;
 using TMPro;
-using UniRx;
 
 namespace Game {
 
+	[RequireComponent(typeof(TextMeshProUGUI))]
     internal sealed class ResourceText : MonoBehaviour {
 
         [SerializeField] private FloatResourceRx _reactiveResource;
-        [SerializeField] private string _resourceType;
 
         private TextMeshProUGUI _resource;
 
@@ -20,8 +19,7 @@ namespace Game {
        }
 
         private void UpdateResourceText() {
-            var currentText = $"{_resourceType}: {_reactiveResource.Value.ToString("0")}";
-            _resource.text = currentText;
+            _resource.text = $"{_reactiveResource.Name}: {_reactiveResource.Value:0}";
         }
 
     }

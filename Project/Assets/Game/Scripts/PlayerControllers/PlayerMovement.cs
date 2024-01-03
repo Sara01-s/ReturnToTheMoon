@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Game {
@@ -23,7 +22,7 @@ namespace Game {
             Move();
         }
 
-        private void Move() {  
+        private void Move() {
             var lefthit = Physics2D.Raycast(_leftRaycast.position, -transform.up, RAYCAST_DISTANCE, _groundayerMask);
             var righthit = Physics2D.Raycast(_rightRaycast.position, -transform.up, RAYCAST_DISTANCE, _groundayerMask);
 
@@ -34,6 +33,7 @@ namespace Game {
 
                 var targetRotation = Quaternion.FromToRotation(Vector2.up, avarageNormal);
                 var finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 45.0f);
+
 
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, finalRotation.eulerAngles.z);
                 transform.position = new Vector2(transform.position.x, avaragePoint.y + transform.up.y * 0.75f); // Genera el movimiento erratico en Y

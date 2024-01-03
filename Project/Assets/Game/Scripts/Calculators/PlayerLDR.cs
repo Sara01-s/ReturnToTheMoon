@@ -1,5 +1,4 @@
 using UnityEngine;
-using UniRx;
 
 namespace Game {
 
@@ -11,7 +10,6 @@ namespace Game {
         [SerializeField] internal float DefaultLDR;
         [SerializeField] internal float MaxDefLDR;
         [SerializeField] internal float MaxLDR;
-
 
         private void Awake() {
             ReactiveResource.Value = DefaultLDR;

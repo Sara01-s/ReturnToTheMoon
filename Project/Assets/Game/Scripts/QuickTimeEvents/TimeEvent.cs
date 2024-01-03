@@ -18,7 +18,7 @@ namespace Game {
         protected abstract IEnumerator CO_InitQTE();
         protected abstract IEnumerator CO_Win();
         protected abstract IEnumerator CO_Lose();
-        protected abstract void Input();
+        protected abstract void OnInput();
 
         private void Awake() {
             _OnTimeEvent = false;
@@ -27,7 +27,7 @@ namespace Game {
         protected virtual void OnTriggerEnter2D(Collider2D collider) {
             if (collider.CompareTag("Player") && !_OnTimeEvent) {
                 _OnTimeEvent = true;
-                PlayerInput.OnInput = Input;
+                PlayerInput.OnInput = OnInput;
                 StartCoroutine(CO_InitQTE());
             }
         }

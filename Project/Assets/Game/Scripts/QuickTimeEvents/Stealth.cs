@@ -9,10 +9,10 @@ namespace Game {
         [SerializeField] private float _delayTime;
         [SerializeField] private float _bigDelayTime;
         
-        private TouchPhase _stationary = TouchPhase.Stationary; 
-        private TouchPhase _moved = TouchPhase.Moved; 
+        private readonly TouchPhase _stationary = TouchPhase.Stationary; 
+        private readonly TouchPhase _moved = TouchPhase.Moved; 
 
-        protected override void Input() {
+        protected override void OnInput() {
             // Otros eventos(?
         }
 

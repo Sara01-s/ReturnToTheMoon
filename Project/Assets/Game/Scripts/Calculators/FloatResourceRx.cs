@@ -5,6 +5,8 @@ namespace Game {
 
     [CreateAssetMenu(menuName = "Float Resource Rx")]
     internal sealed class FloatResourceRx : ScriptableObject {
+
+		public string Name;
            
         public FloatReactiveProperty Observable => _reactiveProperty;
         public float Value {
@@ -12,7 +14,11 @@ namespace Game {
             set => _reactiveProperty.Value = value;
         }
 
-        private readonly FloatReactiveProperty _reactiveProperty = new();   
+        private readonly FloatReactiveProperty _reactiveProperty = new();
+
+		private void OnDisable() {
+			_reactiveProperty.Dispose();
+		}
 
     }
 }

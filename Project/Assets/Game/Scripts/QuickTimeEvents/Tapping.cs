@@ -10,34 +10,39 @@ namespace Game {
         [SerializeField] private float _boostTime;
         [SerializeField] private float _delayTime;
 
-        protected override void Input() {
+        protected override void OnInput() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
         }
 
         protected override IEnumerator CO_InitQTE() {
-            Time.timeScale = _SlowMotionFactor;            
+            Time.timeScale = _SlowMotionFactor;
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("TapTapTap!");
             
             var startTime = Time.unscaledTimeAsDouble;
-            var tapCounter = 0;
+            int numTaps = 0;
 
             while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
-                var currentTouchPhase = PlayerInput.CurrentTouchPhase;
 
                 if (PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
-                    tapCounter++;
-                    print("TapCounter: " + tapCounter);
+                    numTaps++;
+                    print("TapCounter: " + numTaps);
                 }
                 
                 yield return null;
             }
 
-            print("Detente!");
             Time.timeScale = DEFAULT_TIMESCALE;
-            if (tapCounter >= _countGoal) StartCoroutine(CO_Win());
-            if (tapCounter < _countGoal) StartCoroutine(CO_Lose());
+            print("Detente!");
+
+            if (numTaps >= _countGoal) {
+				StartCoroutine(CO_Win());
+			}
+			
+            if (numTaps < _countGoal) {
+				StartCoroutine(CO_Lose());
+			}
         }
 
         protected override IEnumerator CO_Win() {

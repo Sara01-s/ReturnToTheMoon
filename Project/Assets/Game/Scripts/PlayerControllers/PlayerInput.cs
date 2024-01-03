@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using System;
 
 namespace Game {
     
@@ -8,10 +8,8 @@ namespace Game {
         // A TENER EN CUENTA: Habra que deshabilitar el Update cuando se este en los menus, 
         // porque el touch.Count cuenta todos los touch, sin importar el contexto del juego.
     
-        internal delegate void _inputDelegate();
-        internal static _inputDelegate OnInput;
-
-        private static _inputDelegate _defaultInput;
+        internal static Action OnInput;
+        private static Action DefaultInput;
 
         internal static TouchPhase CurrentTouchPhase;
 
@@ -23,7 +21,6 @@ namespace Game {
             }
 
             Touch touch = Input.GetTouch(0);
-
             CurrentTouchPhase = touch.phase;
 
             if (touch.phase == TouchPhase.Began) {
@@ -34,15 +31,15 @@ namespace Game {
             }
         }
 
-        internal static void SetDefaultInput(_inputDelegate inputDelegate) {
-            _defaultInput = inputDelegate;  
-            OnInput = _defaultInput;
+        internal static void SetDefaultInputCallback(Action inputCallback) {
+            DefaultInput = inputCallback;  
+            OnInput = DefaultInput;
         }
 
         internal static void Reset() {
-            if (_defaultInput == null) return;
-
-            OnInput = _defaultInput;
+            if (DefaultInput == null) {
+            	OnInput = DefaultInput;
+			}
         }
 
     }
