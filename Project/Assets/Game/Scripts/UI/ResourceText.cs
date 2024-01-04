@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UniRx;
 
 namespace Game {
 
@@ -12,13 +13,13 @@ namespace Game {
 
         private void Awake() {
             _resource = GetComponent<TextMeshProUGUI>();
+            UpdateResourceText(_reactiveResource.Value);
         }
 
-       private void Update() {
-            UpdateResourceText();
-       }
+        private void OnEnable() => _reactiveResource.Observable.Subscribe(UpdateResourceText);
+        private void OnDisable() => _reactiveResource.Observable.Dispose();
 
-        private void UpdateResourceText() {
+        private void UpdateResourceText(float health) {
             _resource.text = $"{_reactiveResource.Name}: {_reactiveResource.Value:0}";
         }
 

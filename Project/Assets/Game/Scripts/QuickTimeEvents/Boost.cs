@@ -15,17 +15,13 @@ namespace Game {
 
         private bool _boosted;
 
-        private void OnEnable() {
-            PlayerInput.SetDefaultInputCallback(BoostSpeed);
-        }
-
-        private void OnDisable() {
-            PlayerInput.OnInput = null;
-        }
+        private void OnEnable() => PlayerInput.SetDefaultInputCallback(BoostSpeed);
+        private void OnDisable() => PlayerInput.OnInput = null;
 
         private void BoostSpeed() {
-            if (_boosted || PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
-            StartCoroutine(CO_Boosted());
+            if (!_boosted || PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
+                StartCoroutine(CO_Boosted());
+            }
         }
 
         private IEnumerator CO_Boosted() {
@@ -53,9 +49,10 @@ namespace Game {
         }
 
         private IEnumerator CO_StartCooldown(double cooldownDuration) {
-            double startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= cooldownDuration) {
+            while (elapsedTime < cooldownDuration) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 			

@@ -20,10 +20,11 @@ namespace Game {
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("TapTapTap!");
             
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
             int numTaps = 0;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
+            while (elapsedTime < _EventDuration) {
+                elapsedTime += Time.unscaledDeltaTime;
 
                 if (PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
                     numTaps++;
@@ -49,9 +50,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Logrado");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
+            while (elapsedTime < _boostTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
@@ -63,9 +65,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("No logrado");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
+            while (elapsedTime < _delayTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 

@@ -19,13 +19,14 @@ namespace Game {
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             Time.timeScale = DEFAULT_TIMESCALE; 
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
+            while (elapsedTime < _EventDuration) {
+                elapsedTime += Time.deltaTime;
+
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
                 print("Aprieta!");
                 if (currentTouchPhase == TouchPhase.Began) { // Se puede spamear touches y en teoria saldra win casi siempre
-                    PlayerInput.Reset();
                     StartCoroutine(CO_Win());
                     yield break;
                 }
@@ -40,9 +41,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VeryFast;
             print("Acertaste!");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _bigBoostTime) {
+            while (elapsedTime < _bigBoostTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
@@ -54,9 +56,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Fallaste!");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
+            while (elapsedTime < _boostTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 

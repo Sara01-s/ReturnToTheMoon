@@ -13,6 +13,7 @@ namespace Game {
         private readonly TouchPhase _moved = TouchPhase.Moved; 
 
         protected override void OnInput() {
+            if (PlayerInput.CurrentTouchPhase != TouchPhase.Stationary) return;
             // Otros eventos(?
         }
 
@@ -22,13 +23,14 @@ namespace Game {
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             Time.timeScale = DEFAULT_TIMESCALE;
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
+            while (elapsedTime < _EventDuration) {
+                elapsedTime += Time.deltaTime;
+
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
 
                 if (currentTouchPhase != _stationary && currentTouchPhase != _moved) {
-                    PlayerInput.Reset();
                     StartCoroutine(CO_Lose());
                     yield break;
                 }
@@ -44,9 +46,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Slow;
             print("Well Done!");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
+            while (elapsedTime < _delayTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
@@ -58,9 +61,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("Bad!");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _bigDelayTime) {
+            while (elapsedTime < _bigDelayTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 

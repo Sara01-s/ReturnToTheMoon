@@ -1,4 +1,5 @@
 using System.Collections;
+using NaughtyAttributes;
 using UnityEngine;
 using System;
 
@@ -10,8 +11,7 @@ namespace Game {
         [SerializeField] private float _boostTime;
         [SerializeField] private float _delayTime;
         [SerializeField, Range(0.1f, 5.0f)] private float _oscillatonSpeed;
-        [SerializeField, Range(0.0f, 1.0f)] private float _minTargetRange, _maxTargetRange;
-        [SerializeField, Range(0.0f, 1.0f)] private float _minRange, _maxRange;
+        [SerializeField, MinMaxSlider(0, 1)] private Vector2 _targetRange;
 
         private float _oscillationValue;
 
@@ -25,25 +25,25 @@ namespace Game {
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("Acierta correctamente!");
 
-            double startTime = Time.unscaledTimeAsDouble;
+            float elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
+            while (elapsedTime < _EventDuration) {
+                elapsedTime += Time.unscaledDeltaTime;
+
                 var oscillationTime = Time.unscaledTime * _oscillatonSpeed;
                 _oscillationValue = Mathf.PingPong(oscillationTime, 1.0f);
 
+                if (VVT.Common.IsBetween(_oscillationValue, _targetRange.x, _targetRange.y)) print("ahora");
+                
                 var currentTouchPhase = PlayerInput.CurrentTouchPhase;
 
-                if (VVT.Common.IsBetween(_oscillationValue, _minTargetRange, _maxTargetRange)) print("ahora");
-
                 if (currentTouchPhase == TouchPhase.Began) {
-                    if (VVT.Common.IsBetween(_oscillationValue, _minTargetRange, _maxTargetRange)) {
-                        PlayerInput.Reset();
+                    if (VVT.Common.IsBetween(_oscillationValue, _targetRange.x, _targetRange.y)) {
                         Time.timeScale = DEFAULT_TIMESCALE; 
                         StartCoroutine(CO_Win());
                         yield break;
                     }
                     else {
-                        PlayerInput.Reset();
                         Time.timeScale = DEFAULT_TIMESCALE; 
                         StartCoroutine(CO_Lose());
                         yield break;
@@ -61,9 +61,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Lo lograste!");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            var elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
+            while (elapsedTime < _boostTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
@@ -75,9 +76,10 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("Fallaste");
 
-            var startTime = Time.unscaledTimeAsDouble;
+            var elapsedTime = 0.0f;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
+            while (elapsedTime < _delayTime) {
+                elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
