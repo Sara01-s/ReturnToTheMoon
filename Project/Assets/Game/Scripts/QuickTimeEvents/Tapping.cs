@@ -1,14 +1,20 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 namespace Game {
 
     internal sealed class Tapping : TimeEvent {
 
         [Header("Tapping Settings")]
-        [SerializeField] private int _countGoal;
+        [SerializeField] private int _numTapsGoal;
         [SerializeField] private float _boostTime;
         [SerializeField] private float _delayTime;
+
+		internal event Action<float> OnPreparation;
+		internal event Action OnStart;
+		internal event Action OnSuccess;
+		internal event Action OnFail;
 
         protected override void OnInput() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
@@ -16,9 +22,13 @@ namespace Game {
 
         protected override IEnumerator CO_InitQTE() {
             Time.timeScale = _SlowMotionFactor;
-            print("Esperando el tiempo de preparacion...");
+			OnPreparation?.Invoke(_PreparationTimeInSeconds);
+            print("Preparing Tap QTE...");
+
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             
+			OnStart?.Invoke();
+
 			float elapsedTime = 0.0f;
             int numTaps = 0;
 
@@ -37,20 +47,20 @@ namespace Game {
             }
 
             Time.timeScale = DEFAULT_TIMESCALE;
-            print("Tiempo terminado!");
+            print("Tiempo de Tap terminado!");
 
-            if (numTaps >= _countGoal) {
+            if (numTaps >= _numTapsGoal) {
 				StartCoroutine(CO_Win());
 			}
 			
-            if (numTaps < _countGoal) {
+            if (numTaps < _numTapsGoal) {
 				StartCoroutine(CO_Lose());
 			}
         }
 
         protected override IEnumerator CO_Win() {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
-            print("Logrado");
+            print("Tap completado");
 
 			yield return new WaitForSeconds(_boostTime);
 
@@ -60,7 +70,7 @@ namespace Game {
 
         protected override IEnumerator CO_Lose() {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
-            print("No logrado");
+            print("Tap fallado");
 
 			yield return new WaitForSeconds(_boostTime);
 
