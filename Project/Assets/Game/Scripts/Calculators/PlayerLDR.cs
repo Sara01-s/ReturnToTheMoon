@@ -16,10 +16,10 @@ namespace Game {
         }
 
         private void Update() {
-            DecrementLife();
+            DrecreaseHealth();
         }
 
-        private void DecrementLife() {
+        private void DrecreaseHealth() {
             _playerHealth.Value -= Mathf.Abs(ReactiveResource.Value) * Time.deltaTime;
         }
 

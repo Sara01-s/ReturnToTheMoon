@@ -3220,8 +3220,7 @@ MonoBehaviour:
   _boostTime: 0
   _delayTime: 0
   _oscillatonSpeed: 1
-  _minTargetRange: 0.5
-  _maxTargetRange: 1
+  _targetRange: {x: 0, y: 0}
   _minRange: 1
   _maxRange: 0
 --- !u!1 &1351978948
@@ -4234,8 +4233,7 @@ MonoBehaviour:
   _boostTime: 2
   _delayTime: 1
   _oscillatonSpeed: 1
-  _minTargetRange: 0.5
-  _maxTargetRange: 1
+  _targetRange: {x: 0.25, y: 0.75}
   _minRange: 1
   _maxRange: 0
 --- !u!61 &1838691018
