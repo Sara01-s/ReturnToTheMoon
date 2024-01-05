@@ -23,6 +23,7 @@ using UnityEngine.Profiling;
 // Created by Teal Rogers
 // Trinary Software
 // All rights preserved
+// Edited by Sara San Martín 05/01/2024
 // /////////////////////////////////////////////////////////////////////////////////////////
 
 namespace MEC
@@ -477,6 +478,26 @@ namespace MEC
                 currentCoroutine = default(CoroutineHandle);
             }
         }
+
+		// Sara 2024
+		public static void InvokeFor(float seconds, System.Action action) {
+			if (action == null) {
+				Debug.LogError("Please provide a non-null action to the invocation.");
+				return;
+			}
+
+			RunCoroutine(InvokeFor(seconds, action));
+
+			static IEnumerator<float> InvokeFor(float seconds, System.Action action) {
+				float elapsedTime = 0.0f;
+
+				while (elapsedTime < seconds) {
+					action();
+					elapsedTime += Time.deltaTime;
+					yield return WaitForOneFrame;
+				}
+			}
+		}
 
         private void RemoveUnused()
         {

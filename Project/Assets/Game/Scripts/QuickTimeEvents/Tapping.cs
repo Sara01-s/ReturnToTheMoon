@@ -18,23 +18,26 @@ namespace Game {
             Time.timeScale = _SlowMotionFactor;
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
-            print("TapTapTap!");
             
-            var startTime = Time.unscaledTimeAsDouble;
+			float elapsedTime = 0.0f;
             int numTaps = 0;
 
-            while ((Time.unscaledTimeAsDouble - startTime) <= _EventDuration) {
+            while (elapsedTime < _EventDuration) {
+
+				print("Tap!Tap!");
 
                 if (PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
                     numTaps++;
                     print("TapCounter: " + numTaps);
                 }
                 
+				elapsedTime += Time.unscaledDeltaTime;
+				print(elapsedTime);
                 yield return null;
             }
 
             Time.timeScale = DEFAULT_TIMESCALE;
-            print("Detente!");
+            print("Tiempo terminado!");
 
             if (numTaps >= _countGoal) {
 				StartCoroutine(CO_Win());
@@ -49,11 +52,7 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Logrado");
 
-            var startTime = Time.unscaledTimeAsDouble;
-
-            while ((Time.unscaledTimeAsDouble - startTime) <= _boostTime) {
-                yield return null;
-            }
+			yield return new WaitForSeconds(_boostTime);
 
             EndTimeEvent();
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
@@ -63,11 +62,7 @@ namespace Game {
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("No logrado");
 
-            var startTime = Time.unscaledTimeAsDouble;
-
-            while ((Time.unscaledTimeAsDouble - startTime) <= _delayTime) {
-                yield return null;
-            }
+			yield return new WaitForSeconds(_boostTime);
 
             EndTimeEvent();
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Neutral;
