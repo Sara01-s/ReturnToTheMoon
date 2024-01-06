@@ -192,7 +192,18 @@ Estos `Elementos Interactivos` generan la siguiente tabla de Riesgo/Recompensa *
 | Evento de Sigilo               | [Rapidez] = [Muy Lento] por [BIG_DELAY_DURATION] segundos        | [Rapidez] = [Lento] por [STEALTH_EVENT_DURATION] segundos.     |         |                               |              |
 | Boost default        |              | [Stamina] -= [DEFAULT_BOOST_COST] |         | [Rapidez] = [Rápido] durante [DEFAULT_BOOST_DURATION] segundos, [LDR] = [-0.7h/s] durante [DEFAULT_BOOST_DURATION] segundos y [DEFAULT_BOOST_CURRENT_COOLDOWN] = [DEFAULT_BOOST_MAX_COOLDOWN] |              |
 | Hazard QTE            | [Rapidez] = [Muy Lento] por [HAZARD_QTE_DELAY_DURATION] segundos        |           |      |         [Rapidez] = [Rapido] durante [HAZARD_QTE_BOOST_DURATION] segundos                      |              |
-| Boost Musical (WIP)       |              | [Rapidez] = [Lento] por [RHYTHM_DELAY_DURATION] segundos     |         | [Rapidez] = [Rápido] por [RHYTHM_BOOST_DURATION] segundos   
+| Boost Musical (WIP)       |              | [Rapidez] = [Lento] por [RHYTHM_DELAY_DURATION] segundos     |         | [Rapidez] = [Rápido] por [RHYTHM_BOOST_DURATION] segundos
+
+### Feedback y Game Feel
+
+Movimiento del jugador
+- Al ocurrir cualquier cambio de velocidad (negativo o positivo) se efectuará un leve "Camera Shake" de duración muy corta.
+  - Boost de velocidad positivo
+    - Si cambio de velocidad es positivo, se añadirá un trail transparente al jugador.
+    - La animación de boost, debe inclinar al jugador hacia delante.
+  - Boost de velocidad negativo
+    - 
+  
 
 ### Activos necesarios.
 - Datos necesarios
