@@ -1296,7 +1296,7 @@ Transform:
   m_GameObject: {fileID: 687731991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.1944575, y: -2.2070498, z: -10}
+  m_LocalPosition: {x: 6.193168, y: -2.2070498, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1475,11 +1475,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ReactiveResource: {fileID: 11400000, guid: 93acb7ba3b43cab4abca0c4e48c861cb, type: 2}
-  VerySlow: 2.5
-  Slow: 5
-  Neutral: 10
-  Fast: 15
-  VeryFast: 17.5
+  VerySlow: 2
+  Slow: 4
+  Neutral: 8
+  Fast: 12
+  VeryFast: 14
 --- !u!114 &746353752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,8 +1528,8 @@ MonoBehaviour:
   _leftRaycast: {fileID: 2054062712}
   _midRaycast: {fileID: 1985055889}
   _rightRaycast: {fileID: 1092421320}
-  _midRaycastDst: 38.09
-  _heightFromFloor: 0.48
+  _midRaycastDst: 40
+  _heightFromFloor: 0.5
 --- !u!114 &746353755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4711,7 +4711,7 @@ Transform:
   m_GameObject: {fileID: 1927819659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.1944575, y: -2.2070498, z: -10}
+  m_LocalPosition: {x: 6.193168, y: -2.2070498, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

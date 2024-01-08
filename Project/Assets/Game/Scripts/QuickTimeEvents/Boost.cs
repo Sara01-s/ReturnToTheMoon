@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 namespace Game {
 
@@ -13,18 +14,23 @@ namespace Game {
         [SerializeField] private float _defaultMaxCoolDown;
         [SerializeField] private float _defaultBostCost;
 
+        internal event Action OnStart;
+		internal event Action OnCooldown;
+
         private bool _boosted;
 
         private void OnEnable() => PlayerInput.SetDefaultInputCallback(BoostSpeed);
         private void OnDisable() => PlayerInput.OnInput = null;
 
         private void BoostSpeed() {
-            if (!_boosted || PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
+            if (!_boosted && PlayerInput.CurrentTouchPhase == TouchPhase.Began) {
                 StartCoroutine(CO_Boosted());
             }
         }
 
         private IEnumerator CO_Boosted() {
+            OnStart?.Invoke();
+            
 			_boosted = true;
 
             _playerStamina.ReactiveResource.Value -= _defaultBostCost;
@@ -49,6 +55,8 @@ namespace Game {
         }
 
         private IEnumerator CO_StartCooldown(double cooldownDuration) {
+            OnCooldown?.Invoke();
+            
             float elapsedTime = 0.0f;
 
             while (elapsedTime < cooldownDuration) {

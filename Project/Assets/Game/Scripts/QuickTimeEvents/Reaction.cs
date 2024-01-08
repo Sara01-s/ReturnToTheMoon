@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 namespace Game {
 
@@ -8,6 +9,10 @@ namespace Game {
         [Header("Reaction Settings")]
         [SerializeField] private float _boostTime;
         [SerializeField] private float _bigBoostTime;
+
+        internal event Action OnStart;
+		internal event Action OnSuccess;
+		internal event Action OnFail;
 
         protected override void OnInput() {
             if (PlayerInput.CurrentTouchPhase != TouchPhase.Began) return;
@@ -18,6 +23,8 @@ namespace Game {
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             Time.timeScale = DEFAULT_TIMESCALE; 
+
+            OnStart?.Invoke();
 
             float elapsedTime = 0.0f;
 
@@ -38,6 +45,8 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
+            OnSuccess?.Invoke();
+
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VeryFast;
             print("Acertaste!");
 
@@ -53,6 +62,8 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Lose() {
+            OnFail?.Invoke();
+            
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Fallaste!");
 

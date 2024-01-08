@@ -1,4 +1,5 @@
 using UnityEngine;
+using UniRx;
 
 namespace Game {
 
@@ -25,9 +26,17 @@ namespace Game {
 			_constantForce.force = transform.right * _reactiveSpeed.Value;
         }
 
+		private void OnEnable() {
+			_reactiveSpeed.Observable.Subscribe(Move);
+		}
+		private void OnDisable() {
+			_reactiveSpeed.Observable.Dispose();
+		}
+
 		private void Update() {
             RotateTowardsFloorNormal();
 			StickToTheFloor();
+			_constantForce.force = transform.right * _reactiveSpeed.Value;
 		}
 
 		private void StickToTheFloor() {
@@ -54,6 +63,9 @@ namespace Game {
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, finalRotation.eulerAngles.z);
         }
 
+		private void Move(float speed) {
+			_constantForce.force = transform.right * speed;
+		}
 		
 		private void OnDrawGizmos() {
 			var midHit = Physics2D.Raycast(_midRaycast.position, -transform.up, _midRaycastDst, _groundLayer);

@@ -13,6 +13,10 @@ namespace Game {
         [SerializeField, Range(0.1f, 5.0f)] private float _oscillatonSpeed;
         [SerializeField, MinMaxSlider(0, 1)] private Vector2 _targetRange;
 
+        internal event Action OnStart;
+		internal event Action OnSuccess;
+		internal event Action OnFail;
+
         private float _oscillationValue;
 
         protected override void OnInput() {
@@ -24,6 +28,8 @@ namespace Game {
             print("Esperando el tiempo de preparacion...");
             yield return new WaitForSecondsRealtime(_PreparationTimeInSeconds);
             print("Acierta correctamente!");
+
+            OnStart?.Invoke();
 
             float elapsedTime = 0.0f;
 
@@ -58,6 +64,8 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
+            OnSuccess?.Invoke();
+            
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Lo lograste!");
 
@@ -73,6 +81,8 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Lose() {
+            OnFail?.Invoke();
+            
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("Fallaste");
 
