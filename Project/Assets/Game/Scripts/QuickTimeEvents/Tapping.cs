@@ -42,7 +42,6 @@ namespace Game {
                 }
                 
 				elapsedTime += Time.unscaledDeltaTime;
-				print(elapsedTime);
                 yield return null;
             }
 
@@ -59,6 +58,8 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Win() {
+            OnSuccess?.Invoke();
+
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.Fast;
             print("Tap completado");
 
@@ -69,6 +70,8 @@ namespace Game {
         }
 
         protected override IEnumerator CO_Lose() {
+            OnFail?.Invoke();
+
             _PlayerSpeed.ReactiveResource.Value = _PlayerSpeed.VerySlow;
             print("Tap fallado");
 
