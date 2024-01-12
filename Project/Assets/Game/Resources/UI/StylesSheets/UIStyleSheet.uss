@@ -1,0 +1,64 @@
+:root {
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container {
+
+}
+
+.bordered-box {
+    border-width: 4px;
+    border-color: white;
+    border-radius: 15px;
+}
+
+.view-box {
+    width: 500px;
+    height: 350px;
+}
+
+.control-box {
+    width: 500px;
+    margin-top: 10px;
+    padding: 10px;
+
+    flex-direction: row;
+}
+
+.control-box Button {
+    width: 80px;
+    height: 80px;
+
+    background-color: orange;
+
+    border-width: 4px;
+    border-color: white;
+
+    transition: 0.25s all;
+
+    color: white;
+    -unity-font-style: bold;
+}
+
+.control-box Button:hover {
+    background-color: red;
+    border-radius: 10px;
+    scale: 0.75;
+}
+
+.control-box Slider {
+    flex-grow: 1;
+}
+
+.unity-base-slider__dragger {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    background-color: orange;
+    border-width: 4px;
+    border-color: white;
+
+    margin-top: -16px;
+}
